@@ -1326,7 +1326,7 @@ body{padding-bottom:150px}
         return '<div class="ledger-row sys">'
           +'<span class="sn"><a href="../hp/systems.html">'+x.s.name+'</a>'+(x.s.broker?'<em class="bk">'+x.s.broker+'</em>':'')+'</span>'
           +'<span class="sf">'+feat+'</span>'
-          +'<span class="sd">運用'+days+'日</span>'
+          +'<span class="sd">'+days+'日運用中</span>'
           +'<span class="sk">'+spark(x.d.trades,idx)+'</span>'
           +'<span class="sv '+(total>=0?'pos':'neg')+'" data-total="'+total+'">'+yen(total)+'</span>'
           +'<span class="sw" data-wr="'+wr.toFixed(1)+'">勝率'+wr.toFixed(1)+'%</span>'
