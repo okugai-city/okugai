@@ -157,7 +157,8 @@ h2{font-family:var(--serif);font-size:clamp(25px,3.8vw,37px);font-weight:700;lin
 .record{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .ledger{border:1px solid rgba(232,185,92,.3);border-radius:20px;background:linear-gradient(175deg,rgba(21,30,51,.7),rgba(10,15,28,.95));overflow:hidden}
 .ledger-head{display:flex;justify-content:space-between;align-items:center;padding:18px 26px;border-bottom:1px solid rgba(232,185,92,.25);font-family:var(--serif);font-weight:800;letter-spacing:.14em;font-size:14px}
-.ledger-stamp{font-family:var(--sans);font-size:13px;font-weight:900;letter-spacing:.18em;color:var(--gold);border:1px solid rgba(232,185,92,.5);border-radius:999px;padding:9px 20px}
+.ledger-stamp{font-family:var(--sans);font-size:13px;font-weight:900;letter-spacing:.18em;color:var(--gold);border:1px solid rgba(232,185,92,.5);border-radius:999px;padding:9px 20px;white-space:nowrap}
+@media(max-width:640px){.ledger-head{flex-direction:column;align-items:flex-start;gap:12px}.ledger-stamp{font-size:11px;padding:7px 14px;letter-spacing:.12em}}
 .ledger-rows{padding:6px 26px}
 .ledger-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.3fr;gap:12px;padding:16px 0;border-bottom:1px dashed rgba(90,107,146,.35);font-size:12px;color:#5b6a8c;letter-spacing:.08em;font-family:var(--sans)}
 .ledger-row:last-child{border-bottom:none}
@@ -1159,7 +1160,6 @@ body{padding-bottom:150px}
           <a href="https://www.youtube.com/@okugai_salon" target="_blank" rel="noopener" aria-label="億街サロン公式YouTube"><svg class="icf"><use href="#i-youtube"/></svg></a>
           <a href="https://lin.ee/Xp8K8lU" target="_blank" rel="noopener" aria-label="LINE公式"><svg class="icf"><use href="#i-linechat"/></svg></a>
         </div>
-        <p class="sns-note">公式X・YouTubeは開設準備中</p>
       </div>
       <div>
         <h4>このページ</h4>
