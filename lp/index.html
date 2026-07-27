@@ -165,6 +165,10 @@ h2{font-family:var(--serif);font-size:clamp(25px,3.8vw,37px);font-weight:700;lin
 .ledger-empty b{color:var(--gold);font-weight:700}
 .ledger-note{margin-top:14px;font-size:11px;color:var(--sub)}
 .evi-wrap{margin-top:26px}
+/* MT5実録動画(縦型・中央) */
+.ledger-video{display:flex;flex-direction:column;align-items:center;gap:12px;margin:0 auto 26px}
+.ledger-video video{width:min(320px,86vw);border-radius:18px;border:1px solid rgba(232,185,92,.45);box-shadow:0 18px 60px rgba(0,0,0,.5);display:block}
+.ledger-video figcaption{font-size:11.5px;color:var(--sub);letter-spacing:.06em;text-align:center}
 .evi-head{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:15px;font-weight:800;letter-spacing:.06em;margin-bottom:14px}
 .evi-head::before,.evi-head::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(232,185,92,.45),transparent)}
 .evi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -817,6 +821,10 @@ body{padding-bottom:150px}
       <h2>「勝った」とは言わない。記録を見せる。</h2>
       <p class="sec-lead" style="max-width:none">リアルタイムトレードの公開記録も、システムのフォワード記録も——この街で走ったものはすべて、検証レポートと共にこの台帳に刻まれる。履歴動画も、無加工のスクリーンショットも。切り抜きも後出しもできない仕組み。</p>
     </div>
+    <figure class="ledger-video">
+      <video src="../assets/evidence/mt5-live.mp4" poster="../assets/evidence/mt5-live-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+      <figcaption>実際のMT5口座・取引履歴の画面録画（無加工・透かしのみ）。※過去の実績であり、将来の成果を保証するものではありません。</figcaption>
+    </figure>
     <div class="ledger">
       <div class="ledger-head">
         <span>住人の記録簿</span>
