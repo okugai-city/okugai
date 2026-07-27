@@ -161,7 +161,7 @@ h2{font-family:var(--serif);font-size:clamp(25px,3.8vw,37px);font-weight:700;lin
 .ledger-rows{padding:6px 26px}
 .ledger-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.3fr;gap:12px;padding:16px 0;border-bottom:1px dashed rgba(90,107,146,.35);font-size:12px;color:#5b6a8c;letter-spacing:.08em;font-family:var(--sans)}
 .ledger-row:last-child{border-bottom:none}
-.ledger-row.sys{grid-template-columns:.65fr 1.55fr 150px 1.05fr .7fr .8fr;color:#c3cde4;align-items:center;transition:background .25s}
+.ledger-row.sys{grid-template-columns:.65fr 1.55fr .7fr 150px 1.05fr .8fr;color:#c3cde4;align-items:center;transition:background .25s}
 .ledger-row.sys:hover{background:rgba(232,185,92,.05)}
 .ledger-row.sys .sn{font-weight:900;letter-spacing:.06em;font-size:14.5px}
 .ledger-row.sys .sn a{color:var(--text);border-bottom:1px dashed rgba(232,185,92,.4)}
@@ -1326,9 +1326,9 @@ body{padding-bottom:150px}
         return '<div class="ledger-row sys">'
           +'<span class="sn"><a href="../hp/systems.html">'+x.s.name+'</a>'+(x.s.broker?'<em class="bk">'+x.s.broker+'</em>':'')+'</span>'
           +'<span class="sf">'+feat+'</span>'
+          +'<span class="sd">運用'+days+'日</span>'
           +'<span class="sk">'+spark(x.d.trades,idx)+'</span>'
           +'<span class="sv '+(total>=0?'pos':'neg')+'" data-total="'+total+'">'+yen(total)+'</span>'
-          +'<span class="sd">稼働'+days+'日</span>'
           +'<span class="sw" data-wr="'+wr.toFixed(1)+'">勝率'+wr.toFixed(1)+'%</span>'
           +'</div>';
       }).join('');

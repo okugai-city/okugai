@@ -292,8 +292,8 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
     updSim();
 
     var stats=[
-      ['稼働開始日',esc(d.start||d.trades[0].d),'初回トレード日',''],
-      ['稼働日数',days+'日','本日時点(暦日)',''],
+      ['運用開始日',esc(d.start||d.trades[0].d),'初回トレード日',''],
+      ['運用日数',days+'日','本日時点(暦日)',''],
       ['純入金(差引)',yen(net),'入金'+yen(dep)+' − 出金'+yen(wd)+(net<0?' = 出金超過(利益回収済み)':''),'gold'],
       ['合計損益',yen(total),(d.trades[0].d.slice(0,10))+' 〜 '+(d.trades[n-1].d.slice(0,10)),total>=0?'pos':'neg'],
       ['利益率(ROI)',pct(total/roiBase*100),'合計損益 ÷ 最大投下資金'+yen(roiBase),total>=0?'pos':'neg'],
