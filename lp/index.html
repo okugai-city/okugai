@@ -157,7 +157,7 @@ h2{font-family:var(--serif);font-size:clamp(25px,3.8vw,37px);font-weight:700;lin
 .record{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .ledger{border:1px solid rgba(232,185,92,.3);border-radius:20px;background:linear-gradient(175deg,rgba(21,30,51,.7),rgba(10,15,28,.95));overflow:hidden}
 .ledger-head{display:flex;justify-content:space-between;align-items:center;padding:18px 26px;border-bottom:1px solid rgba(232,185,92,.25);font-family:var(--serif);font-weight:800;letter-spacing:.14em;font-size:14px}
-.ledger-stamp{font-family:var(--sans);font-size:10.5px;font-weight:900;letter-spacing:.18em;color:var(--gold);border:1px solid rgba(232,185,92,.45);border-radius:999px;padding:6px 14px}
+.ledger-stamp{font-family:var(--sans);font-size:13px;font-weight:900;letter-spacing:.18em;color:var(--gold);border:1px solid rgba(232,185,92,.5);border-radius:999px;padding:9px 20px}
 .ledger-rows{padding:6px 26px}
 .ledger-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.3fr;gap:12px;padding:16px 0;border-bottom:1px dashed rgba(90,107,146,.35);font-size:12px;color:#5b6a8c;letter-spacing:.08em;font-family:var(--sans)}
 .ledger-row:last-child{border-bottom:none}
@@ -175,7 +175,7 @@ h2{font-family:var(--serif);font-size:clamp(25px,3.8vw,37px);font-weight:700;lin
 .ledger-row.sys .sv.neg{color:var(--red)}
 .ledger-row.sys .sd,.ledger-row.sys .sw{color:#93a2c4;font-variant-numeric:tabular-nums}
 @media(max-width:760px){.ledger-row.sys{grid-template-columns:1fr 1fr}.ledger-row.sys .sf,.ledger-row.sys .sk{display:none}}
-.ledger-stamp.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:8px;vertical-align:1px;animation:lpulse 1.8s ease-out infinite}
+.ledger-stamp.live::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--gold);margin-right:10px;vertical-align:0px;box-shadow:0 0 8px rgba(232,185,92,.8);animation:lpulse 1.6s ease-out infinite}
 @keyframes lpulse{0%{opacity:1;box-shadow:0 0 0 0 rgba(232,185,92,.55)}70%{opacity:.55;box-shadow:0 0 0 6px rgba(232,185,92,0)}100%{opacity:1;box-shadow:0 0 0 0 rgba(232,185,92,0)}}
 .ledger-cta a{display:inline-block;color:var(--gold);font-family:var(--sans);font-size:13px;font-weight:900;letter-spacing:.1em;border:1px solid rgba(232,185,92,.5);border-radius:999px;padding:11px 26px;transition:all .2s}
 .ledger-cta a:hover{background:rgba(232,185,92,.12)}
@@ -1333,7 +1333,7 @@ body{padding-bottom:150px}
           +'</div>';
       }).join('');
       if(empty){empty.className='ledger-empty ledger-cta';empty.innerHTML='<a href="../hp/systems.html">システム別の走行記録ダッシュボードを見る →</a>'}
-      if(stamp){stamp.textContent='自動記帳・'+list.length+'システム稼働中';stamp.classList.add('live')}
+      if(stamp){stamp.textContent='自動記帳・'+list.length+'システム運用中';stamp.classList.add('live')}
       /* カウントアップ演出(初期表示は確定値=未発火でも壊れない) */
       try{
         var played=false;
