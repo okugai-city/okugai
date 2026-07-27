@@ -111,7 +111,7 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
     <div class="crumb"><a href="index.html">億街ポータル</a> / 住人の記録簿</div>
     <div class="kicker">TRACK RECORD — システム走行記録</div>
     <h1>「勝った」とは言わない。<br>走った記録を、そのまま見せる。</h1>
-    <p class="lead">工房のシステムが実際の口座で走った記録を、取引データから自動集計して公開します。切り抜きも、後出しも、できない仕組み。<b>過去の記録は将来の成果を保証しません</b>——だからこそ、全部見せます。</p>
+    <p class="lead">工房のシステムが実際の口座で走った記録を、取引データから自動集計して公開します(デモ環境での検証はその旨をタグに明記)。切り抜きも、後出しも、できない仕組み。<b>過去の記録は将来の成果を保証しません</b>——だからこそ、全部見せます。</p>
 
     <nav class="sys-tabs" id="sys-tabs" hidden></nav>
 
@@ -186,6 +186,9 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
     document.getElementById('d-tag').textContent=sys.tag||'';
     var dep=0,wd=0;(d.cash||[]).forEach(function(c){if(c.type==='deposit')dep+=c.amount;else wd+=c.amount});
     var net=dep-wd;
+    /* 最大投下資金(入出金の時系列で最も多く資金が入っていた瞬間) = ROIの分母。出金超過口座でも破綻しない */
+    var run=0,peakNet=0;(d.cash||[]).slice().sort(function(a,b){return a.date<b.date?-1:1}).forEach(function(c){run+=(c.type==='deposit'?c.amount:-c.amount);if(run>peakNet)peakNet=run});
+    var roiBase=peakNet>0?peakNet:(net||1);
     var total=0,wins=0;
     var monthly={};var pairs={};
     d.trades.forEach(function(t){
@@ -201,14 +204,14 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
     /* 完全月(最初と今月を除く)の平均月利 */
     var nowYm=new Date().toISOString().slice(0,7);
     var fulls=yms.filter(function(ym){return ym!==nowYm});
-    var avgM=fulls.length?fulls.reduce(function(a,ym){return a+monthly[ym].pl},0)/fulls.length/(net||1)*100:0;
+    var avgM=fulls.length?fulls.reduce(function(a,ym){return a+monthly[ym].pl},0)/fulls.length/roiBase*100:0;
 
     var stats=[
       ['稼働開始日',esc(d.start||d.trades[0].d),'初回トレード日',''],
       ['稼働日数',days+'日','本日時点(暦日)',''],
-      ['純運用資金',yen(net),'入金'+yen(dep)+' − 出金'+yen(wd),'gold'],
+      ['純入金(差引)',yen(net),'入金'+yen(dep)+' − 出金'+yen(wd)+(net<0?' = 出金超過(利益回収済み)':''),'gold'],
       ['合計損益',yen(total),(d.trades[0].d.slice(0,10))+' 〜 '+(d.trades[n-1].d.slice(0,10)),total>=0?'pos':'neg'],
-      ['利益率(ROI)',pct(total/(net||1)*100),'合計損益 ÷ 純運用資金',total>=0?'pos':'neg'],
+      ['利益率(ROI)',pct(total/roiBase*100),'合計損益 ÷ 最大投下資金'+yen(roiBase),total>=0?'pos':'neg'],
       ['平均月利',pct(avgM),'完全月の単純平均',avgM>=0?'pos':'neg'],
       ['トレード数',n+'回','全期間',''],
       ['勝率',(wins/n*100).toFixed(1)+'%',wins+'W / '+(n-wins)+'L','gold']
@@ -252,12 +255,14 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
              '<span class="lm"><span>取引数 '+m.n+'</span><span>勝率 '+(m.w/m.n*100).toFixed(1)+'%</span><span>累積 '+yen(cums[i])+'</span></span></div>';
     }).join('');
 
-    /* ペア別(損益順) */
+    /* ペア別(損益順)。pips未記録のシステムでは平均pipsを表示しない */
     var pkeys=Object.keys(pairs).sort(function(a,b){return pairs[b].pl-pairs[a].pl});
+    var hasPips=pkeys.some(function(p){return Math.abs(pairs[p].pips)>0.05});
     document.getElementById('d-pairs').innerHTML=pkeys.map(function(p){
       var v=pairs[p];
+      var pipsHtml=hasPips?'<span>平均pips '+(v.pips/v.n>=0?'+':'')+(v.pips/v.n).toFixed(1)+'</span>':'';
       return '<div class="lrow"><span class="lt">'+esc(p)+'</span><span class="lv '+(v.pl>=0?'pos':'neg')+'">'+yen(v.pl)+'</span>'+
-             '<span class="lm"><span>件数 '+v.n+'</span><span>勝率 '+(v.w/v.n*100).toFixed(1)+'%</span><span>平均pips '+(v.pips/v.n>=0?'+':'')+(v.pips/v.n).toFixed(1)+'</span></span></div>';
+             '<span class="lm"><span>件数 '+v.n+'</span><span>勝率 '+(v.w/v.n*100).toFixed(1)+'%</span>'+pipsHtml+'</span></div>';
     }).join('');
   }
 })();
