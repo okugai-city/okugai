@@ -476,7 +476,7 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
   /* 住人キャラの中の人(Discordユーザー名・小文字) → キャラ表示定義。住人カウント=plan「住人」 */
   var CHARAS={
     'pythonfun':{name:'T.K.',img:'../assets/residents/nox.jpg?v=20260722',plan:'住人',banchi:'元103号室',since:'短期・マクロ担当'},
-    'xpher_':{name:'Mr.N',img:'../assets/residents/mrn.jpg?v=20260724',plan:'住人',banchi:'元104号室',since:'グローバル担当'}
+    'xpher_':{name:'T.K.',img:'../assets/residents/nox.jpg?v=20260722',plan:'住人',banchi:'元103号室',since:'短期・マクロ担当'}
   };
   var _persona={realName:'',realFace:'',chips:null,isOp:false,chara:OYAKATA};
   function personaRender(){
@@ -993,7 +993,7 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
     document.getElementById('room-title').textContent='おかえりなさい、'+name+'。';
     var _em=(user.email||'').toLowerCase();
     if(_em.slice(-9)==='@a-dot.jp'||OPERATORS.indexOf(user.email)>=0||OPERATORS.indexOf(name)>=0||OPERATORS.indexOf(meta.name||'')>=0) setupPersona(name, meta.avatar_url);
-    else{var _un=(meta.name||'').toLowerCase();if(CHARAS[_un])setupPersona(name, meta.avatar_url, CHARAS[_un]);}
+    else{var _un=String(meta.full_name||meta.name||'').toLowerCase().replace(/#\d+$/,'');if(CHARAS[_un])setupPersona(name, meta.avatar_url, CHARAS[_un]);}
 
     sb.from('profiles').select('*').eq('id',user.id).maybeSingle().then(function(r){
       var p=r.data||{};
