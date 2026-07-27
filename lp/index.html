@@ -161,13 +161,19 @@ h2{font-family:var(--serif);font-size:clamp(25px,3.8vw,37px);font-weight:700;lin
 .ledger-rows{padding:6px 26px}
 .ledger-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.3fr;gap:12px;padding:16px 0;border-bottom:1px dashed rgba(90,107,146,.35);font-size:12px;color:#5b6a8c;letter-spacing:.08em;font-family:var(--sans)}
 .ledger-row:last-child{border-bottom:none}
-.ledger-row.sys{grid-template-columns:.75fr 1.9fr .8fr 1.1fr .9fr;color:#c3cde4;align-items:baseline}
+.ledger-row.sys{grid-template-columns:.65fr 1.55fr 150px .7fr 1.05fr .8fr;color:#c3cde4;align-items:center;transition:background .25s}
+.ledger-row.sys:hover{background:rgba(232,185,92,.05)}
 .ledger-row.sys .sn{font-weight:900;letter-spacing:.06em}
 .ledger-row.sys .sn a{color:var(--text);border-bottom:1px dashed rgba(232,185,92,.4)}
 .ledger-row.sys .sf{color:var(--sub);font-size:11.5px}
-.ledger-row.sys .sv{font-family:var(--serif);font-weight:800;font-size:15px;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.ledger-row.sys .sd,.ledger-row.sys .sw{color:#93a2c4}
-@media(max-width:640px){.ledger-row.sys{grid-template-columns:1fr 1fr}.ledger-row.sys .sf{display:none}}
+.ledger-row.sys .sk{opacity:.85;transition:opacity .25s}
+.ledger-row.sys:hover .sk{opacity:1}
+.ledger-row.sys .sk svg{display:block;width:100%;height:32px}
+.ledger-row.sys .sv{font-family:var(--serif);font-weight:800;font-size:16px;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-variant-numeric:tabular-nums}
+.ledger-row.sys .sd,.ledger-row.sys .sw{color:#93a2c4;font-variant-numeric:tabular-nums}
+@media(max-width:760px){.ledger-row.sys{grid-template-columns:1fr 1fr}.ledger-row.sys .sf,.ledger-row.sys .sk{display:none}}
+.ledger-stamp.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:8px;vertical-align:1px;animation:lpulse 1.8s ease-out infinite}
+@keyframes lpulse{0%{opacity:1;box-shadow:0 0 0 0 rgba(232,185,92,.55)}70%{opacity:.55;box-shadow:0 0 0 6px rgba(232,185,92,0)}100%{opacity:1;box-shadow:0 0 0 0 rgba(232,185,92,0)}}
 .ledger-cta a{display:inline-block;color:var(--gold);font-family:var(--sans);font-size:13px;font-weight:900;letter-spacing:.1em;border:1px solid rgba(232,185,92,.5);border-radius:999px;padding:11px 26px;transition:all .2s}
 .ledger-cta a:hover{background:rgba(232,185,92,.12)}
 .ledger-empty{padding:26px;text-align:center;font-family:var(--serif);font-size:14.5px;color:var(--sub);border-top:1px solid rgba(232,185,92,.25);letter-spacing:.08em}
@@ -1287,23 +1293,65 @@ body{padding-bottom:150px}
       var empty=document.querySelector('.ledger-empty');
       var stamp=document.querySelector('.ledger-stamp');
       function yen(n){return (n<0?'−':'+')+(Math.abs(n)/10000).toFixed(1)+'万円'}
-      rows.innerHTML=list.map(function(x){
+      /* 累積損益のミニスパークライン(実データ) */
+      function spark(trades,idx){
+        var cum=0,pts=trades.map(function(t){cum+=t.pl;return cum});
+        var stepN=Math.max(1,Math.ceil(pts.length/60));
+        var ds=[];for(var i=0;i<pts.length;i+=stepN)ds.push(pts[i]);
+        if(ds[ds.length-1]!==pts[pts.length-1])ds.push(pts[pts.length-1]);
+        var W=150,H=32,lo=Math.min(0,Math.min.apply(null,ds)),hi=Math.max.apply(null,ds);
+        var poly=ds.map(function(v,i){
+          var x=(i/(ds.length-1))*(W-8)+4;
+          var y=H-4-((v-lo)/((hi-lo)||1))*(H-10);
+          return x.toFixed(1)+','+y.toFixed(1);
+        }).join(' ');
+        var last=poly.split(' ').pop().split(',');
+        return '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+          +'<defs><filter id="skg'+idx+'" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>'
+          +'<polyline points="'+poly+'" fill="none" stroke="#e8b95c" stroke-width="1.4" stroke-linejoin="round" filter="url(#skg'+idx+')" opacity=".9"/>'
+          +'<circle cx="'+last[0]+'" cy="'+last[1]+'" r="2.2" fill="#e8b95c"/></svg>';
+      }
+      rows.innerHTML=list.map(function(x,idx){
         var total=0,wins=0;
         x.d.trades.forEach(function(t){total+=t.pl;if(t.pl>=0)wins++});
         var n=x.d.trades.length;
         var start=new Date(x.d.start||x.d.trades[0].d);
         var days=Math.max(1,Math.round((Date.now()-start.getTime())/86400000));
         var feat=(x.s.tag||'').split(' ・ ')[0];
+        var wr=wins/n*100;
         return '<div class="ledger-row sys">'
           +'<span class="sn"><a href="../hp/systems.html">'+x.s.name+'</a></span>'
           +'<span class="sf">'+feat+'</span>'
+          +'<span class="sk">'+spark(x.d.trades,idx)+'</span>'
           +'<span class="sd">稼働'+days+'日</span>'
-          +'<span class="sv">'+yen(total)+'</span>'
-          +'<span class="sw">勝率'+(wins/n*100).toFixed(1)+'%</span>'
+          +'<span class="sv" data-total="'+total+'">'+yen(total)+'</span>'
+          +'<span class="sw" data-wr="'+wr.toFixed(1)+'">勝率'+wr.toFixed(1)+'%</span>'
           +'</div>';
       }).join('');
       if(empty){empty.className='ledger-empty ledger-cta';empty.innerHTML='<a href="../hp/systems.html">システム別の走行記録ダッシュボードを見る →</a>'}
-      if(stamp)stamp.textContent='自動記帳・'+list.length+'システム稼働中';
+      if(stamp){stamp.textContent='自動記帳・'+list.length+'システム稼働中';stamp.classList.add('live')}
+      /* カウントアップ演出(初期表示は確定値=未発火でも壊れない) */
+      try{
+        var played=false;
+        var io=new IntersectionObserver(function(es){
+          es.forEach(function(e){
+            if(!e.isIntersecting||played)return;
+            played=true;io.disconnect();
+            var t0=performance.now(),DUR=1400;
+            var svs=[].slice.call(rows.querySelectorAll('.sv'));
+            var sws=[].slice.call(rows.querySelectorAll('.sw'));
+            function frame(now){
+              var p=Math.min(1,(now-t0)/DUR);
+              var ease=1-Math.pow(1-p,3);
+              svs.forEach(function(el){el.textContent=yen(parseFloat(el.dataset.total)*ease)});
+              sws.forEach(function(el){el.textContent='勝率'+(parseFloat(el.dataset.wr)*ease).toFixed(1)+'%'});
+              if(p<1)requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+          });
+        },{threshold:.35});
+        io.observe(rows);
+      }catch(e){}
     });
   }).catch(function(){});
   /* 実弾の証拠: data/evidence.json(空=非表示。盛らない)

@@ -43,7 +43,7 @@ main{padding:52px 0 80px}
 .crumb a{color:var(--sub);border-bottom:1px dashed rgba(147,162,196,.4)}
 .kicker{font-size:10.5px;font-weight:900;letter-spacing:.4em;text-indent:.4em;color:var(--gold);margin-bottom:14px}
 h1{font-family:var(--serif);font-size:clamp(26px,5vw,38px);font-weight:800;letter-spacing:.05em;line-height:1.5}
-.lead{color:var(--sub);font-size:13.5px;margin-top:16px;max-width:640px}
+.lead{color:var(--sub);font-size:13px;margin-top:16px;max-width:none}
 /* システム切替タブ */
 .sys-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:30px}
 .sys-tabs button{font-family:var(--sans);font-size:12.5px;font-weight:900;color:var(--sub);background:transparent;border:1px solid var(--line2);border-radius:999px;padding:9px 20px;cursor:pointer;transition:all .2s}
@@ -70,6 +70,31 @@ h1{font-family:var(--serif);font-size:clamp(26px,5vw,38px);font-weight:800;lette
 .chart-card .ct b{font-size:13px;font-weight:900;letter-spacing:.06em}
 .chart-card .ct span{font-size:10.5px;color:var(--sub)}
 .chart-card svg{width:100%;height:auto;margin-top:10px}
+/* もし運用シミュレーター */
+.sim-card{background:linear-gradient(135deg,rgba(232,185,92,.07),rgba(15,22,38,.92));border:1px solid rgba(232,185,92,.35);border-radius:16px;padding:22px;margin-top:14px}
+.sim-card .ct{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.sim-card .ct b{font-family:var(--serif);font-size:15.5px;font-weight:800;letter-spacing:.06em;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sim-card .ct span{font-size:10.5px;color:var(--sub)}
+.sim-ui{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}
+.sim-inwrap{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line2);border-radius:10px;padding:8px 14px}
+.sim-inwrap:focus-within{border-color:rgba(232,185,92,.6)}
+.sim-lbl{font-size:11px;color:var(--sub);font-weight:700;letter-spacing:.08em}
+#sim-in{width:120px;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--serif);font-size:18px;font-weight:800;text-align:right}
+.sim-unit{color:var(--sub);font-size:12px}
+.sim-presets{display:flex;gap:6px;flex-wrap:wrap}
+.sim-presets button{font-family:var(--sans);font-size:11px;font-weight:900;color:var(--sub);background:transparent;border:1px solid var(--line2);border-radius:999px;padding:6px 13px;cursor:pointer;transition:all .2s}
+.sim-presets button:hover{color:var(--gold);border-color:rgba(232,185,92,.55)}
+.sim-res{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+@media(max-width:760px){.sim-res{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.sim-res{grid-template-columns:1fr}}
+.sr{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;overflow:hidden}
+.sr::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--grad-gold);opacity:.6}
+.srl{display:block;font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--sub)}
+.srv{font-family:var(--serif);font-size:21px;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
+.srv.pos{color:var(--lime)}
+.srv.neg{color:var(--red)}
+.srv.gold{background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sim-note{margin-top:12px;font-size:10.5px;color:var(--sub);line-height:1.7}
 /* 明細 */
 .list-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:6px 22px;margin-top:14px}
 .lrow{display:grid;grid-template-columns:1fr auto;gap:4px 14px;padding:13px 0;border-bottom:1px dashed rgba(46,64,100,.6)}
@@ -111,7 +136,7 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
     <div class="crumb"><a href="index.html">億街ポータル</a> / 住人の記録簿</div>
     <div class="kicker">TRACK RECORD — システム走行記録</div>
     <h1>「勝った」とは言わない。<br>走った記録を、そのまま見せる。</h1>
-    <p class="lead">工房のシステムが実際の口座で走った記録を、<br>取引データから自動集計して公開します(デモ環境での検証はその旨をタグに明記)。<br>切り抜きも、後出しも、できない仕組み。<b>過去の記録は将来の成果を保証しません</b>——だからこそ、全部見せます。</p>
+    <p class="lead">工房のシステムが実際の口座で走った記録を、取引データから自動集計して公開します(デモ環境での検証はその旨をタグに明記)。<br>切り抜きも、後出しも、できない仕組み。<b>過去の記録は将来の成果を保証しません</b>——だからこそ、全部見せます。</p>
 
     <nav class="sys-tabs" id="sys-tabs" hidden></nav>
 
@@ -124,6 +149,20 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
       <div class="chart-card">
         <div class="ct"><b>損益推移(月次)</b><span>棒=期間損益 / 線=累積損益(スケール別)</span></div>
         <svg id="d-chart" viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="月次損益グラフ"></svg>
+      </div>
+      <div class="sim-card">
+        <div class="ct"><b>もし、あなたが走らせていたら</b><span>この走行記録と同じ増減率で単純換算した参考値</span></div>
+        <div class="sim-ui">
+          <div class="sim-inwrap"><span class="sim-lbl">開始資金</span><input id="sim-in" type="number" value="300000" min="10000" step="10000" inputmode="numeric"><span class="sim-unit">円</span></div>
+          <div class="sim-presets"><button type="button" data-v="100000">10万</button><button type="button" data-v="300000">30万</button><button type="button" data-v="1000000">100万</button><button type="button" data-v="3000000">300万</button></div>
+        </div>
+        <div class="sim-res">
+          <div class="sr"><span class="srl">参考損益(全期間)</span><span class="srv" id="sim-pl">—</span></div>
+          <div class="sr"><span class="srl">参考残高</span><span class="srv gold" id="sim-bal">—</span></div>
+          <div class="sr"><span class="srl">月平均ペース</span><span class="srv" id="sim-m">—</span></div>
+          <div class="sr"><span class="srl">想定最大DD(同率)</span><span class="srv neg" id="sim-dd">—</span></div>
+        </div>
+        <p class="sim-note">※ 過去の特定期間の記録をそのまま単純比例させた参考値です。想定最大DDは「この記録と同率のドローダウンが起きた場合の一時的な下落幅」であり、実際はこれを超える損失が生じる可能性があります。将来の成果を示唆・保証するものではなく、資金量・相場環境・執行条件により実際の結果は大きく異なります。</p>
       </div>
       <p class="sec-t">月次明細</p>
       <div class="list-card" id="d-monthly"></div>
@@ -161,6 +200,21 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
   function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
   function yen(n){return (n<0?'−':'')+'¥'+Math.abs(Math.round(n)).toLocaleString('ja-JP')}
   function pct(n){return (n>=0?'+':'−')+Math.abs(n).toFixed(1)+'%'}
+  /* もし運用シミュレーター */
+  function updSim(){
+    var p=window._simP;if(!p)return;
+    var inp=document.getElementById('sim-in');
+    var amt=parseFloat(inp&&inp.value)||0;
+    var pl=amt*p.ratio;
+    var elP=document.getElementById('sim-pl'),elB=document.getElementById('sim-bal'),elM=document.getElementById('sim-m');
+    if(!elP)return;
+    elP.textContent=(pl>=0?'+':'')+yen(pl);
+    elP.className='srv '+(pl>=0?'pos':'neg');
+    elB.textContent=yen(amt+pl);
+    elM.textContent=(p.avgM>=0?'+':'')+yen(amt*p.avgM/100)+' /月';
+    var elD=document.getElementById('sim-dd');
+    if(elD)elD.textContent=yen(-amt*p.ddRatio);
+  }
 
   fetch('../data/systems/index.json?v='+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(ix){
     var systems=(ix&&ix.systems)||[];
@@ -191,12 +245,17 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
     var roiBase=peakNet>0?peakNet:(net||1);
     var total=0,wins=0;
     var monthly={};var pairs={};
+    /* リスク指標: 最大DD(累計損益ピークからの下落)・最大単発損失・最大連敗・PF */
+    var gw=0,gl=0,minPl=0,streak=0,maxStreak=0,cumR=0,peakR=0,mdd=0;
     d.trades.forEach(function(t){
       total+=t.pl;if(t.pl>=0)wins++;
+      if(t.pl>=0){gw+=t.pl;streak=0}else{gl-=t.pl;streak++;if(streak>maxStreak)maxStreak=streak;if(t.pl<minPl)minPl=t.pl}
+      cumR+=t.pl;if(cumR>peakR)peakR=cumR;var dd0=peakR-cumR;if(dd0>mdd)mdd=dd0;
       var ym=t.d.slice(0,7);
       (monthly[ym]=monthly[ym]||{pl:0,n:0,w:0});monthly[ym].pl+=t.pl;monthly[ym].n++;if(t.pl>=0)monthly[ym].w++;
       (pairs[t.p]=pairs[t.p]||{pl:0,n:0,w:0,pips:0});pairs[t.p].pl+=t.pl;pairs[t.p].n++;if(t.pl>=0)pairs[t.p].w++;pairs[t.p].pips+=(t.pips||0);
     });
+    var pf=gl>0?gw/gl:null;
     var n=d.trades.length;
     var start=new Date(d.start||d.trades[0].d);
     var days=Math.max(1,Math.round((Date.now()-start.getTime())/86400000));
@@ -205,6 +264,19 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
     var nowYm=new Date().toISOString().slice(0,7);
     var fulls=yms.filter(function(ym){return ym!==nowYm});
     var avgM=fulls.length?fulls.reduce(function(a,ym){return a+monthly[ym].pl},0)/fulls.length/roiBase*100:0;
+    /* シミュレーター用パラメータ(表示中システムの実績比率) */
+    window._simP={ratio:total/roiBase,avgM:avgM,ddRatio:mdd/roiBase};
+    if(!window._simInit){
+      window._simInit=true;
+      var simIn=document.getElementById('sim-in');
+      if(simIn){
+        simIn.addEventListener('input',updSim);
+        document.querySelectorAll('.sim-presets button').forEach(function(b){
+          b.addEventListener('click',function(){simIn.value=b.dataset.v;updSim()});
+        });
+      }
+    }
+    updSim();
 
     var stats=[
       ['稼働開始日',esc(d.start||d.trades[0].d),'初回トレード日',''],
@@ -214,7 +286,11 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
       ['利益率(ROI)',pct(total/roiBase*100),'合計損益 ÷ 最大投下資金'+yen(roiBase),total>=0?'pos':'neg'],
       ['平均月利',pct(avgM),'完全月の単純平均',avgM>=0?'pos':'neg'],
       ['トレード数',n+'回','全期間',''],
-      ['勝率',(wins/n*100).toFixed(1)+'%',wins+'W / '+(n-wins)+'L','gold']
+      ['勝率',(wins/n*100).toFixed(1)+'%',wins+'W / '+(n-wins)+'L','gold'],
+      ['最大DD',yen(-mdd),'累計損益ピークからの下落幅(-'+(mdd/roiBase*100).toFixed(1)+'% / 最大投下資金比)','neg'],
+      ['プロフィットファクター',pf?pf.toFixed(2):'—','総利益 ÷ 総損失',pf&&pf>=1?'pos':'neg'],
+      ['最大単発損失',yen(minPl),'1トレードの最大マイナス','neg'],
+      ['最大連敗',maxStreak+'連敗','連続マイナストレード数','neg']
     ];
     document.getElementById('d-stats').innerHTML=stats.map(function(s){
       return '<div class="stat"><div class="sl">'+s[0]+'</div><div class="sv '+s[3]+'">'+s[1]+'</div><div class="sn2">'+s[2]+'</div></div>';
