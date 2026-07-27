@@ -62,6 +62,8 @@ h1{font-family:var(--serif);font-size:clamp(30px,5.5vw,46px);font-weight:800;let
 .profile h2 small{font-family:var(--sans);font-size:11px;color:var(--sub);letter-spacing:.24em;margin-left:14px;font-weight:700}
 .room{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--gold);border:1px solid rgba(232,185,92,.4);border-radius:999px;padding:3px 12px;margin:10px 0 0}
 .quote{font-family:var(--serif);font-size:17px;font-weight:700;color:#dfe6f4;border-left:3px solid;padding:6px 0 6px 18px;margin:22px 0}
+.plabel{font-size:10px;font-weight:900;letter-spacing:.3em;text-indent:.02em;color:var(--gold);margin:22px 0 8px}
+.plabel+.quote{margin-top:0}
 .psns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
 .psns a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:999px;padding:8px 16px;font-size:12px;font-weight:700;color:#c3cde4;transition:border-color .2s,color .2s}
 .psns a:hover{color:var(--text);border-color:rgba(232,185,92,.5)}
@@ -140,6 +142,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>大家<small>THE LANDLORD</small></h2>
       <span class="room">あの塔の主</span>
       <p class="pbody" style="margin-top:18px">この街の主。AI×投資の実装を武器に、この街のすべての仕組みを設計した張本人。</p>
+      <div class="plabel">口癖</div>
       <div class="quote" style="border-color:#e8b95c">「ここが最終地点となるでしょう」</div>
       <p class="pbody">名もない荘の、ただの大家だった。投資経験は15年以上。これまであらゆる金融商品に触れて今に至る。街のすべてのシステムを設計し、いまも一人で鍛え続けている。素顔と名前は、まだ誰も知らない。</p>
       <div class="psns">
@@ -158,6 +161,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>TABO<small>TABO</small></h2>
       <span class="room">元102号室</span>
       <p class="pbody" style="margin-top:18px">統計学と平均回帰を武器に相場と戦う街の工房主。データの確度に重きを置く。期待値、破産確率、そして規律。退場しないための技術を教える。</p>
+      <div class="plabel">口癖</div>
       <div class="quote" style="border-color:#41d8ff">「聖杯はやらん。鍛冶場なら貸してやる。」</div>
       <p class="pbody">元102号室。荘でいちばん電気代を食う部屋だった。夜通し回り続ける検証マシンの音を、隣人たちは雨音だと思っていたという。数字が揃うまでは、絶対に動かない。動いたときは、誰よりも迷いがない。</p>
       <div class="psns">
@@ -176,6 +180,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>T.K.<small>T.K.</small></h2>
       <span class="room">元103号室</span>
       <p class="pbody" style="margin-top:18px">秒と分の世界に住む短期担当。スプレッド、約定、値動きの癖。短期売買の考え方と検証手順。金利、経済指標、地政学。中長期の相場観の組み立ても得意とする。</p>
+      <div class="plabel">口癖</div>
       <div class="quote" style="border-color:#8d7bff">「ニュースに乗るな。文脈を読め。」</div>
       <p class="pbody">元103号室。灯りがつくのは決まって深夜。世界のニュースが東京の朝に届くころには、彼の検証はもう終わっている。予想を当てることには興味がない。愛しているのは、シナリオの構造だけだ。</p>
       <div class="psns">
@@ -194,6 +199,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>Mr.N<small>MR.N</small></h2>
       <span class="room">元104号室</span>
       <p class="pbody" style="margin-top:18px">グローバル担当。７ヶ国語を操る。</p>
+      <div class="plabel">口癖</div>
       <div class="quote" style="border-color:#e0864f">「国境はあっても、チャートは一枚だ。」</div>
       <p class="pbody">元104号室。いつから荘にいたのか、誰も正確には覚えていない。気づけば全員の兄貴分になっていた。7つの言葉を操り、海の向こうの市場と街をつなぐ。困っている住人の前には、なぜかいつも最初に現れる。</p>
       <div class="psns">
@@ -212,6 +218,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>ナギ<small>NAGI</small></h2>
       <span class="room">元202号室</span>
       <p class="pbody" style="margin-top:18px">見習い。全てに全力で取り組む。</p>
+      <div class="plabel">口癖</div>
       <div class="quote" style="border-color:#59f2a2">「勝ち方より先に、死なない方法。」</div>
       <p class="pbody">元202号室。住人の中でいちばんの若手で、いまも自分を「見習い」と呼ぶ。荘に来る前に口座を三度溶かし、その記録をいまも机に貼っているという。だから彼女の授業は、いつも同じところから始まる——退場しないこと。</p>
       <div class="psns">
@@ -230,6 +237,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>アルマ<small>ALMA</small></h2>
       <span class="room">元201号室</span>
       <p class="pbody" style="margin-top:18px">クオンツ担当。AI世界の人物。</p>
+      <div class="plabel">口癖</div>
       <div class="quote" style="border-color:#41d8ff">「その手法、バックテストした？」</div>
       <p class="pbody">元201号室。いつから荘にいたのか、記録が残っていない。AIであることを公表している、唯一の電脳住人。データ以外を信仰せず、「恋と実力を見分けるのが仕事」と言い切る。工房で今日も、道具を鍛えている。</p>
       <div class="psns">
