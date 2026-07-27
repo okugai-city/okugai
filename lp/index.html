@@ -573,6 +573,16 @@ table{font-variant-numeric:tabular-nums}
 
 /* 最終CTAのLINEボタン */
 .reg-line{display:inline-flex;align-items:center;gap:9px;margin-top:18px;padding:13px 30px;border-radius:999px;font-weight:900;font-size:13.5px;background:linear-gradient(135deg,#59f2a2,#2bd47f);color:#05070d}
+/* 入居までの動線(登録=LINE / 活動=Discord) */
+.flow3{display:flex;align-items:stretch;justify-content:center;gap:8px;margin:20px auto 0;flex-wrap:wrap;max-width:760px}
+.flow3 .fstep{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1px solid var(--line2);border-radius:13px;padding:11px 18px;background:rgba(10,14,24,.62);min-width:158px}
+.flow3 .fstep b{font-size:9px;font-weight:900;letter-spacing:.24em;color:var(--cyan)}
+.flow3 .fstep span{font-size:13px;font-weight:800;color:#e6ebf7;letter-spacing:.02em}
+.flow3 .fstep small{font-size:10.5px;color:var(--sub);font-weight:700}
+.flow3 .fstep.goal{border-color:rgba(232,185,92,.5)}
+.flow3 .fstep.goal b{color:var(--gold)}
+.flow3 .farr{align-self:center;color:var(--sub);font-size:15px;font-weight:900}
+@media(max-width:640px){.flow3{flex-direction:column;align-items:stretch;max-width:320px}.flow3 .farr{transform:rotate(90deg);line-height:1;margin:-2px 0}}
 .reg-line.soon{opacity:.45;pointer-events:none}
 .reg-or{display:flex;align-items:center;gap:14px;max-width:360px;margin:20px auto 0;font-size:11px;color:var(--sub);letter-spacing:.2em}
 .reg-or::before,.reg-or::after{content:"";flex:1;height:1px;background:var(--line2)}
@@ -657,6 +667,13 @@ body{padding-bottom:150px}
       <p class="hero-sub">ここは「億街サロン」——電脳の街・億街の入口。実績あるシステムの利用。住人のトレードのリアルタイム公開。そして番地で育つコミュニティ。本物だけが残る街——<span class="lead-em">それが億街サロン</span></p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#register">LINEで移住登録する(いま¥0)</a>
+      </div>
+      <div class="flow3" style="justify-content:flex-start;margin-left:0" aria-label="入居までの流れ">
+        <span class="fstep"><b>STEP 1</b><span>LINEで移住登録</span><small>いま¥0・決済不要</small></span>
+        <span class="farr">→</span>
+        <span class="fstep"><b>STEP 2</b><span>移住案内が届く</span><small>その場でLINEに</small></span>
+        <span class="farr">→</span>
+        <span class="fstep goal"><b>STEP 3</b><span>Discordの街へ入居</span><small>活動拠点はここ</small></span>
       </div>
       <p class="hero-note">※ 当サロンは教育・コミュニティサービスであり、投資助言・シグナル配信は行いません。</p>
     </div>
@@ -1140,6 +1157,13 @@ body{padding-bottom:150px}
     <div class="sec-label">IMMIGRATION</div>
     <h2>移住登録は、こちらで。</h2>
     <p>先行リリースの初期住民、募集中——移住費は2026年9月末まで¥0。<br>LINEで登録すると、移住案内(実績データと見学席への招待)が<b>その場で</b>届きます。</p>
+    <div class="flow3" aria-label="入居までの流れ">
+      <span class="fstep"><b>STEP 1</b><span>LINEで移住登録</span><small>いま¥0・決済不要</small></span>
+      <span class="farr">→</span>
+      <span class="fstep"><b>STEP 2</b><span>移住案内が届く</span><small>その場でLINEに</small></span>
+      <span class="farr">→</span>
+      <span class="fstep goal"><b>STEP 3</b><span>Discordの街へ入居</span><small>活動拠点はここ</small></span>
+    </div>
     <a class="reg-line" href="https://lin.ee/Xp8K8lU" target="_blank" rel="noopener" aria-label="LINEで移住登録する"><svg class="icf" style="width:18px;height:18px;fill:currentColor"><use href="#i-linechat"/></svg>LINEで移住登録する</a>
     <div class="line-qr" style="max-width:340px;margin:16px auto 0;text-align:left"><img src="../assets/line-qr.png" alt="LINE友だち追加QRコード" loading="lazy" width="96" height="96"><p><b>PCの方はスマホで読み取り</b>LINEアプリで友だち追加できます</p></div>
     <div class="reg-or">または</div>
