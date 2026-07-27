@@ -248,7 +248,7 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
 
   function render(sys,d){
     document.getElementById('d-name').textContent=sys.name;
-    document.getElementById('d-tag').textContent=sys.tag||'';
+    document.getElementById('d-tag').innerHTML=(sys.broker?'<span style="color:var(--gold);font-weight:900">'+esc(sys.broker)+'</span> ・ ':'')+esc(sys.tag||'');
     var dep=0,wd=0;(d.cash||[]).forEach(function(c){if(c.type==='deposit')dep+=c.amount;else wd+=c.amount});
     var net=dep-wd;
     /* 最大投下資金(入出金の時系列で最も多く資金が入っていた瞬間) = ROIの分母。出金超過口座でも破綻しない */
