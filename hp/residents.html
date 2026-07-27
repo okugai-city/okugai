@@ -62,6 +62,12 @@ h1{font-family:var(--serif);font-size:clamp(30px,5.5vw,46px);font-weight:800;let
 .profile h2 small{font-family:var(--sans);font-size:11px;color:var(--sub);letter-spacing:.24em;margin-left:14px;font-weight:700}
 .room{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--gold);border:1px solid rgba(232,185,92,.4);border-radius:999px;padding:3px 12px;margin:10px 0 0}
 .quote{font-family:var(--serif);font-size:17px;font-weight:700;color:#dfe6f4;border-left:3px solid;padding:6px 0 6px 18px;margin:22px 0}
+.psns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.psns a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:999px;padding:8px 16px;font-size:12px;font-weight:700;color:#c3cde4;transition:border-color .2s,color .2s}
+.psns a:hover{color:var(--text);border-color:rgba(232,185,92,.5)}
+.psns svg{width:13px;height:13px;fill:currentColor}
+.psns a.soon{opacity:.4;pointer-events:none}
+.psns a.soon i{font-style:normal;font-size:9px;font-weight:900;letter-spacing:.12em;color:var(--sub);margin-left:2px}
 .pbody{font-size:14.5px;color:#c3cde4}
 .pbody p{margin-bottom:14px}
 .pbody strong{color:var(--text)}
@@ -95,6 +101,10 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
 </style>
 </head>
 <body id="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-xlogo" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></symbol>
+  <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol>
+</svg>
 <header>
   <div class="nav">
     <a href="index.html" class="logo"><span class="kanji">億街</span><span class="sub">住人名鑑</span></a>
@@ -130,6 +140,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>大家<small>THE LANDLORD</small></h2>
       <span class="room">あの塔の主</span>
       <p class="pbody" style="margin-top:18px">この街の主。AI×投資の実装を武器に、この街のすべての仕組みを設計した張本人。</p>
+      <div class="quote" style="border-color:#e8b95c">「ここが最終地点となるでしょう」</div>
+      <p class="pbody">名もない荘の、ただの大家だった。投資経験は15年以上。これまであらゆる金融商品に触れて今に至る。街のすべてのシステムを設計し、いまも一人で鍛え続けている。素顔と名前は、まだ誰も知らない。</p>
+      <div class="psns">
+        <a class="soon" href="https://x.com/okugai_mayor" target="_blank" rel="noopener" aria-label="大家のX"><svg><use href="#i-xlogo"/></svg>X<i>準備中</i></a>
+        <a class="soon" href="https://www.tiktok.com/@okugai_mayor" target="_blank" rel="noopener" aria-label="大家のTikTok"><svg><use href="#i-tiktok"/></svg>TikTok<i>準備中</i></a>
+      </div>
     </div>
   </div>
 </section>
@@ -142,6 +158,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>TABO<small>TABO</small></h2>
       <span class="room">元102号室</span>
       <p class="pbody" style="margin-top:18px">統計学と平均回帰を武器に相場と戦う街の工房主。データの確度に重きを置く。期待値、破産確率、そして規律。退場しないための技術を教える。</p>
+      <div class="quote" style="border-color:#41d8ff">「聖杯はやらん。鍛冶場なら貸してやる。」</div>
+      <p class="pbody">元102号室。荘でいちばん電気代を食う部屋だった。夜通し回り続ける検証マシンの音を、隣人たちは雨音だと思っていたという。数字が揃うまでは、絶対に動かない。動いたときは、誰よりも迷いがない。</p>
+      <div class="psns">
+        <a class="soon" href="https://x.com/okugai_tabo" target="_blank" rel="noopener" aria-label="TABOのX"><svg><use href="#i-xlogo"/></svg>X<i>準備中</i></a>
+        <a class="soon" href="https://www.tiktok.com/@okugai_tabo" target="_blank" rel="noopener" aria-label="TABOのTikTok"><svg><use href="#i-tiktok"/></svg>TikTok<i>準備中</i></a>
+      </div>
     </div>
   </div>
 </section>
@@ -154,6 +176,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>T.K.<small>T.K.</small></h2>
       <span class="room">元103号室</span>
       <p class="pbody" style="margin-top:18px">秒と分の世界に住む短期担当。スプレッド、約定、値動きの癖。短期売買の考え方と検証手順。金利、経済指標、地政学。中長期の相場観の組み立ても得意とする。</p>
+      <div class="quote" style="border-color:#8d7bff">「ニュースに乗るな。文脈を読め。」</div>
+      <p class="pbody">元103号室。灯りがつくのは決まって深夜。世界のニュースが東京の朝に届くころには、彼の検証はもう終わっている。予想を当てることには興味がない。愛しているのは、シナリオの構造だけだ。</p>
+      <div class="psns">
+        <a class="soon" href="https://x.com/okugai_tk" target="_blank" rel="noopener" aria-label="T.K.のX"><svg><use href="#i-xlogo"/></svg>X<i>準備中</i></a>
+        <a class="soon" href="https://www.tiktok.com/@okugai_tk" target="_blank" rel="noopener" aria-label="T.K.のTikTok"><svg><use href="#i-tiktok"/></svg>TikTok<i>準備中</i></a>
+      </div>
     </div>
   </div>
 </section>
@@ -166,6 +194,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>Mr.N<small>MR.N</small></h2>
       <span class="room">元104号室</span>
       <p class="pbody" style="margin-top:18px">グローバル担当。７ヶ国語を操る。</p>
+      <div class="quote" style="border-color:#e0864f">「国境はあっても、チャートは一枚だ。」</div>
+      <p class="pbody">元104号室。いつから荘にいたのか、誰も正確には覚えていない。気づけば全員の兄貴分になっていた。7つの言葉を操り、海の向こうの市場と街をつなぐ。困っている住人の前には、なぜかいつも最初に現れる。</p>
+      <div class="psns">
+        <a class="soon" href="https://x.com/okugai_mrn" target="_blank" rel="noopener" aria-label="Mr.NのX"><svg><use href="#i-xlogo"/></svg>X<i>準備中</i></a>
+        <a class="soon" href="https://www.tiktok.com/@okugai_mrn" target="_blank" rel="noopener" aria-label="Mr.NのTikTok"><svg><use href="#i-tiktok"/></svg>TikTok<i>準備中</i></a>
+      </div>
     </div>
   </div>
 </section>
@@ -178,6 +212,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>ナギ<small>NAGI</small></h2>
       <span class="room">元202号室</span>
       <p class="pbody" style="margin-top:18px">見習い。全てに全力で取り組む。</p>
+      <div class="quote" style="border-color:#59f2a2">「勝ち方より先に、死なない方法。」</div>
+      <p class="pbody">元202号室。住人の中でいちばんの若手で、いまも自分を「見習い」と呼ぶ。荘に来る前に口座を三度溶かし、その記録をいまも机に貼っているという。だから彼女の授業は、いつも同じところから始まる——退場しないこと。</p>
+      <div class="psns">
+        <a class="soon" href="https://x.com/okugai_nagi" target="_blank" rel="noopener" aria-label="ナギのX"><svg><use href="#i-xlogo"/></svg>X<i>準備中</i></a>
+        <a class="soon" href="https://www.tiktok.com/@okugai_nagi" target="_blank" rel="noopener" aria-label="ナギのTikTok"><svg><use href="#i-tiktok"/></svg>TikTok<i>準備中</i></a>
+      </div>
     </div>
   </div>
 </section>
@@ -190,6 +230,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:11.5px;color:va
       <h2>アルマ<small>ALMA</small></h2>
       <span class="room">元201号室</span>
       <p class="pbody" style="margin-top:18px">クオンツ担当。AI世界の人物。</p>
+      <div class="quote" style="border-color:#41d8ff">「その手法、バックテストした？」</div>
+      <p class="pbody">元201号室。いつから荘にいたのか、記録が残っていない。AIであることを公表している、唯一の電脳住人。データ以外を信仰せず、「恋と実力を見分けるのが仕事」と言い切る。工房で今日も、道具を鍛えている。</p>
+      <div class="psns">
+        <a class="soon" href="https://x.com/okugai_alma" target="_blank" rel="noopener" aria-label="アルマのX"><svg><use href="#i-xlogo"/></svg>X<i>準備中</i></a>
+        <a class="soon" href="https://www.tiktok.com/@okugai_alma" target="_blank" rel="noopener" aria-label="アルマのTikTok"><svg><use href="#i-tiktok"/></svg>TikTok<i>準備中</i></a>
+      </div>
     </div>
   </div>
 </section>
