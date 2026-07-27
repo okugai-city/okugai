@@ -122,7 +122,7 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
       </div>
       <div class="stat-grid" id="d-stats"></div>
       <div class="chart-card">
-        <div class="ct"><b>損益推移(月次)</b><span>棒=期間損益 / 線=累積損益</span></div>
+        <div class="ct"><b>損益推移(月次)</b><span>棒=期間損益 / 線=累積損益(スケール別)</span></div>
         <svg id="d-chart" viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="月次損益グラフ"></svg>
       </div>
       <p class="sec-t">月次明細</p>
@@ -278,6 +278,11 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
     pts.forEach(function(p,i){
       if(i===pts.length-1){
         svg+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="3.2" fill="#e8b95c"/>';
+        /* 累積の最終値ラベル */
+        var ctot=cums[cums.length-1];
+        var clab='累積 '+(ctot>=0?'+':'−')+(Math.abs(ctot)/10000).toFixed(1)+'万';
+        var cly=Math.max(12,p[1]-10);
+        svg+='<text x="'+(p[0]-9).toFixed(1)+'" y="'+cly.toFixed(1)+'" fill="#e8b95c" font-size="10" font-weight="700" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">'+clab+'</text>';
       }else{
         svg+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="2" fill="#0f1626" stroke="#e8b95c" stroke-width="1.2"/>';
       }
