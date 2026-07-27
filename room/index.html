@@ -472,19 +472,26 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
   function fmt(n){return Number(n||0).toLocaleString('ja-JP')}
   var PLAN={free:'見学',kichi:'秘密基地',okuso:'億荘'};
   var OPERATORS=['k-kunugi@a-dot.jp','kenya0513@icloud.com']; /* 運営者リスト: email か Discordユーザー名。さらに @a-dot.jp のメールは自動で運営者扱い(下のenter内) */
-  var _persona={realName:'',realFace:'',chips:null,isOp:false};
+  var OYAKATA={name:'大家',img:'../assets/residents/mayor.jpg?v=20260722',plan:'運営',banchi:'あの塔',since:'街の主宰'};
+  /* 住人キャラの中の人(Discordユーザー名・小文字) → キャラ表示定義。住人カウント=plan「住人」 */
+  var CHARAS={
+    'pythonfun':{name:'T.K.',img:'../assets/residents/nox.jpg?v=20260722',plan:'住人',banchi:'元103号室',since:'短期・マクロ担当'},
+    'xpher_':{name:'Mr.N',img:'../assets/residents/mrn.jpg?v=20260724',plan:'住人',banchi:'元104号室',since:'グローバル担当'}
+  };
+  var _persona={realName:'',realFace:'',chips:null,isOp:false,chara:OYAKATA};
   function personaRender(){
     if(!_persona.isOp) return;
     var mode='self'; try{mode=localStorage.getItem('okugai_persona')||'self';}catch(e){}
     var btn=document.getElementById('persona-toggle');
     if(mode==='oyakata'){
-      document.getElementById('id-name').textContent='大家';
-      document.getElementById('id-face').innerHTML='<img src="../assets/residents/mayor.jpg?v=20260722" alt="">';
-      document.getElementById('room-title').textContent='おかえりなさい、大家。';
-      document.getElementById('id-plan').textContent='運営';
-      document.getElementById('id-banchi').textContent='あの塔';
-      document.getElementById('id-since').textContent='街の主宰';
-      if(btn)btn.textContent='表示: 大家 ⇄ 本人';
+      var c=_persona.chara||OYAKATA;
+      document.getElementById('id-name').textContent=c.name;
+      document.getElementById('id-face').innerHTML='<img src="'+c.img+'" alt="">';
+      document.getElementById('room-title').textContent='おかえりなさい、'+c.name+'。';
+      document.getElementById('id-plan').textContent=c.plan;
+      document.getElementById('id-banchi').textContent=c.banchi;
+      document.getElementById('id-since').textContent=c.since;
+      if(btn)btn.textContent='表示: '+c.name+' ⇄ 本人';
     }else{
       document.getElementById('id-name').textContent=_persona.realName;
       document.getElementById('id-face').innerHTML=_persona.realFace;
@@ -494,12 +501,12 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
         document.getElementById('id-banchi').textContent=_persona.chips.banchi;
         document.getElementById('id-since').textContent=_persona.chips.since;
       }
-      if(btn)btn.textContent='表示: 本人 ⇄ 大家';
+      if(btn)btn.textContent='表示: 本人 ⇄ '+((_persona.chara||OYAKATA).name);
     }
   }
-  function setupPersona(realName, avatarUrl){
+  function setupPersona(realName, avatarUrl, charaDef){
     var btn=document.getElementById('persona-toggle'); if(!btn) return;
-    _persona.isOp=true; _persona.realName=realName;
+    _persona.isOp=true; _persona.realName=realName; _persona.chara=charaDef||OYAKATA;
     _persona.realFace = avatarUrl ? '<img src="'+esc(avatarUrl)+'" alt="">' : esc((realName||'？').slice(0,1));
     btn.hidden=false;
     btn.onclick=function(){ var m=(localStorage.getItem('okugai_persona')==='oyakata')?'self':'oyakata'; try{localStorage.setItem('okugai_persona',m);}catch(e){} personaRender(); };
@@ -986,6 +993,7 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
     document.getElementById('room-title').textContent='おかえりなさい、'+name+'。';
     var _em=(user.email||'').toLowerCase();
     if(_em.slice(-9)==='@a-dot.jp'||OPERATORS.indexOf(user.email)>=0||OPERATORS.indexOf(name)>=0||OPERATORS.indexOf(meta.name||'')>=0) setupPersona(name, meta.avatar_url);
+    else{var _un=(meta.name||'').toLowerCase();if(CHARAS[_un])setupPersona(name, meta.avatar_url, CHARAS[_un]);}
 
     sb.from('profiles').select('*').eq('id',user.id).maybeSingle().then(function(r){
       var p=r.data||{};
