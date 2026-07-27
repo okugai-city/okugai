@@ -822,10 +822,26 @@ body{padding-bottom:150px}
       <p class="sec-lead" style="max-width:none">リアルタイムトレードの公開記録も、システムのフォワード記録も——この街で走ったものはすべて、検証レポートと共にこの台帳に刻まれる。履歴動画も、無加工のスクリーンショットも。切り抜きも後出しもできない仕組み。</p>
     </div>
     <div class="ledger-videos">
-      <video src="../assets/evidence/mt5-live.mp4" poster="../assets/evidence/mt5-live-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
-      <video src="../assets/evidence/mt5-live2.mp4" poster="../assets/evidence/mt5-live2-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="../assets/evidence/mt5-live.mp4" poster="../assets/evidence/mt5-live-poster.jpg" muted loop playsinline preload="none"></video>
+      <video src="../assets/evidence/mt5-live2.mp4" poster="../assets/evidence/mt5-live2-poster.jpg" muted loop playsinline preload="none"></video>
+      <video src="../assets/evidence/mt5-live3.mp4" poster="../assets/evidence/mt5-live3-poster.jpg" muted loop playsinline preload="none"></video>
+      <video src="../assets/evidence/mt5-live4.mp4" poster="../assets/evidence/mt5-live4-poster.jpg" muted loop playsinline preload="none"></video>
     </div>
     <p class="ledger-vnote">実際のMT5口座・取引履歴の画面録画（無加工・透かしのみ）。※過去の実績であり、将来の成果を保証するものではありません。</p>
+    <script>
+    /* 見えている動画だけ再生(データ節約)。IntersectionObserver非対応環境では全再生にフォールバック */
+    (function(){
+      var vids=document.querySelectorAll('.ledger-videos video');
+      if(!('IntersectionObserver' in window)){vids.forEach(function(v){v.play().catch(function(){})});return}
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          var v=e.target;
+          if(e.isIntersecting){v.play().catch(function(){})}else{v.pause()}
+        });
+      },{threshold:.25});
+      vids.forEach(function(v){io.observe(v)});
+    })();
+    </script>
     <div class="ledger">
       <div class="ledger-head">
         <span>住人の記録簿</span>
