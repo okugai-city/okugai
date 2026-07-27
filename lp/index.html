@@ -161,6 +161,15 @@ h2{font-family:var(--serif);font-size:clamp(25px,3.8vw,37px);font-weight:700;lin
 .ledger-rows{padding:6px 26px}
 .ledger-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.3fr;gap:12px;padding:16px 0;border-bottom:1px dashed rgba(90,107,146,.35);font-size:12px;color:#5b6a8c;letter-spacing:.08em;font-family:var(--sans)}
 .ledger-row:last-child{border-bottom:none}
+.ledger-row.sys{grid-template-columns:.75fr 1.9fr .8fr 1.1fr .9fr;color:#c3cde4;align-items:baseline}
+.ledger-row.sys .sn{font-weight:900;letter-spacing:.06em}
+.ledger-row.sys .sn a{color:var(--text);border-bottom:1px dashed rgba(232,185,92,.4)}
+.ledger-row.sys .sf{color:var(--sub);font-size:11.5px}
+.ledger-row.sys .sv{font-family:var(--serif);font-weight:800;font-size:15px;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ledger-row.sys .sd,.ledger-row.sys .sw{color:#93a2c4}
+@media(max-width:640px){.ledger-row.sys{grid-template-columns:1fr 1fr}.ledger-row.sys .sf{display:none}}
+.ledger-cta a{display:inline-block;color:var(--gold);font-family:var(--sans);font-size:13px;font-weight:900;letter-spacing:.1em;border:1px solid rgba(232,185,92,.5);border-radius:999px;padding:11px 26px;transition:all .2s}
+.ledger-cta a:hover{background:rgba(232,185,92,.12)}
 .ledger-empty{padding:26px;text-align:center;font-family:var(--serif);font-size:14.5px;color:var(--sub);border-top:1px solid rgba(232,185,92,.25);letter-spacing:.08em}
 .ledger-empty b{color:var(--gold);font-weight:700}
 .ledger-note{margin-top:14px;font-size:11px;color:var(--sub)}
@@ -858,7 +867,7 @@ body{padding-bottom:150px}
       </div>
       <p class="ledger-empty">最初のページは、まだ白い。<b>開街と同時に、ここに最初の記録が刻まれる。</b></p>
     </div>
-    <p class="ledger-note">※ 記録はリアルタイムトレードで公開された事実の記載です。将来の成果を保証するものではありません。 <a href="../hp/systems.html" style="color:var(--cyan);border-bottom:1px dashed rgba(65,216,255,.4)">システム別の走行記録ダッシュボード →</a></p>
+    <p class="ledger-note">※ 数値は各システムの取引データ(MT4/MT5履歴)からの自動集計です。過去の記録であり、将来の成果を保証するものではありません。</p>
     <div class="evi-wrap" id="evi-wrap" hidden>
       <div class="evi-head"><span>実弾の証拠 — 履歴動画・スクリーンショット</span></div>
       <div class="evi-grid" id="evi-grid"></div>
@@ -1265,16 +1274,37 @@ body{padding-bottom:150px}
       if(ok){var d=document.createElement('div');d.className='okuso-slots';d.textContent='定員'+st.okuso_capacity+'・残り'+st.okuso_remaining;ok.after(d);}
     }
   }).catch(function(){});
-  fetch('../data/records.json?v='+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(recs){
-    if(!recs||!recs.length)return;
-    var rows=document.querySelector('.ledger-rows');
-    var empty=document.querySelector('.ledger-empty');
-    var stamp=document.querySelector('.ledger-stamp');
-    rows.innerHTML=recs.slice(0,6).map(function(n){
-      return '<div class="ledger-row live"><span>'+n.date+'</span><span>'+n.src+'</span><span>'+(n.pair||'—')+'</span><span>'+(n.link?'<a href="'+n.link+'">検証レポート</a>':(n.note||'—'))+'</span></div>';
-    }).join('');
-    if(empty)empty.remove();
-    if(stamp)stamp.textContent='記帳 '+recs.length+'件';
+  /* 住人の記録簿: data/systems/ の取引データから自動集計(走行記録ダッシュボードと同一ソース) */
+  fetch('../data/systems/index.json?v='+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(ix){
+    var systems=(ix&&ix.systems)||[];
+    if(!systems.length)return;
+    return Promise.all(systems.map(function(s){
+      return fetch('../data/systems/'+encodeURIComponent(s.id)+'.json?v='+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(d){return {s:s,d:d}});
+    })).then(function(list){
+      list=list.filter(function(x){return x.d&&x.d.trades&&x.d.trades.length});
+      if(!list.length)return;
+      var rows=document.querySelector('.ledger-rows');
+      var empty=document.querySelector('.ledger-empty');
+      var stamp=document.querySelector('.ledger-stamp');
+      function yen(n){return (n<0?'−':'+')+(Math.abs(n)/10000).toFixed(1)+'万円'}
+      rows.innerHTML=list.map(function(x){
+        var total=0,wins=0;
+        x.d.trades.forEach(function(t){total+=t.pl;if(t.pl>=0)wins++});
+        var n=x.d.trades.length;
+        var start=new Date(x.d.start||x.d.trades[0].d);
+        var days=Math.max(1,Math.round((Date.now()-start.getTime())/86400000));
+        var feat=(x.s.tag||'').split(' ・ ')[0];
+        return '<div class="ledger-row sys">'
+          +'<span class="sn"><a href="../hp/systems.html">'+x.s.name+'</a></span>'
+          +'<span class="sf">'+feat+'</span>'
+          +'<span class="sd">稼働'+days+'日</span>'
+          +'<span class="sv">'+yen(total)+'</span>'
+          +'<span class="sw">勝率'+(wins/n*100).toFixed(1)+'%</span>'
+          +'</div>';
+      }).join('');
+      if(empty){empty.className='ledger-empty ledger-cta';empty.innerHTML='<a href="../hp/systems.html">システム別の走行記録ダッシュボードを見る →</a>'}
+      if(stamp)stamp.textContent='自動記帳・'+list.length+'システム稼働中';
+    });
   }).catch(function(){});
   /* 実弾の証拠: data/evidence.json(空=非表示。盛らない)
      型: [{"type":"video|shot","date":"2026-08-01","title":"実況#1 CADJPY +37pips","url":"https://...","thumb":"../assets/evidence/x.jpg"}] */
