@@ -321,6 +321,8 @@ table.cmp{width:100%;min-width:640px;border-collapse:separate;border-spacing:0;f
 .plan li.off::before{content:"";position:absolute;left:4px;top:1.35em;width:11px;height:1.5px;background:var(--line2)}
 .plan .btn{width:100%;margin-top:auto;justify-content:center}
 .plan ul{margin-bottom:26px}
+/* 3列表示ではヘッダー/特典リスト/ボタンの行位置をカード間で揃える */
+@media(min-width:981px){.plan{display:grid;grid-template-rows:subgrid;grid-row:span 3;align-content:start}}
 /* founding perks */
 @media(max-width:760px){}
 .perks li b{display:block;color:var(--text);font-weight:700;margin-bottom:4px;font-size:13.5px}
