@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>入居受付 | 億街サロン</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070d;--panel:rgba(13,18,30,.85);--line:rgba(120,150,210,.16);--line2:rgba(120,150,210,.3);
+  --text:#e6ebf7;--sub:#8fa0bf;--cyan:#57d7f2;--gold:#e8b95c;--gold2:#f6d992;--lime:#7ef2a8;
+  --grad:linear-gradient(90deg,#57d7f2,#7f7ff2);
+  --serif:"Shippori Mincho","Hiragino Mincho ProN",serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.9;min-height:100vh;
+  background-image:radial-gradient(1200px 600px at 70% -10%,rgba(87,215,242,.07),transparent),radial-gradient(900px 500px at 10% 110%,rgba(232,185,92,.05),transparent)}
+a{color:var(--cyan)}
+.wrap{max-width:640px;margin:0 auto;padding:48px 22px 80px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:34px}
+.brand .kanji{font-family:var(--serif);font-size:26px;font-weight:800;letter-spacing:.14em}
+.brand small{font-size:10px;letter-spacing:.34em;color:var(--sub);font-weight:900}
+.badge{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--line2);border-radius:999px;padding:7px 18px;font-size:11px;letter-spacing:.16em;color:var(--sub);margin-bottom:18px}
+.badge b{color:var(--gold2);font-weight:900}
+h1{font-family:var(--serif);font-size:30px;font-weight:800;letter-spacing:.04em;margin-bottom:10px}
+.lead{font-size:13.5px;color:var(--sub);margin-bottom:30px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px 26px;margin-bottom:18px}
+.card h2{font-family:var(--serif);font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.card h2 .n{font-family:var(--serif);font-size:22px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+.card p{font-size:13px;color:var(--sub)}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:16px;padding:15px 18px;border-radius:999px;font-weight:900;font-size:14px;text-decoration:none;cursor:pointer;border:0;font-family:var(--sans)}
+.btn-primary{background:var(--grad);color:#05070d}
+.btn-gold{background:linear-gradient(90deg,#e8b95c,#f6d992);color:#05070d}
+.btn-ghost{background:transparent;border:1px solid var(--line2);color:var(--text);font-weight:700}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.note{font-size:11.5px;color:var(--sub);margin-top:12px}
+.note b{color:var(--gold2)}
+.ok{color:var(--lime);font-weight:900}
+.warn{border:1px solid rgba(232,185,92,.4);border-radius:14px;padding:14px 16px;font-size:12px;color:var(--sub);margin-top:16px}
+.warn b{color:var(--gold2)}
+.me{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-top:14px;font-size:13px}
+.me .tag{font-size:10px;letter-spacing:.2em;color:var(--sub);font-weight:900}
+.me b{color:var(--cyan)}
+.price{font-family:var(--serif);font-size:15px;color:var(--gold2);font-weight:800;letter-spacing:.04em;margin-top:6px}
+.hidden{display:none}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--line2);border-top-color:var(--cyan);border-radius:50%;animation:sp 1s linear infinite;vertical-align:-2px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.foot{margin-top:36px;font-size:11px;color:var(--sub)}
+.foot a{color:var(--sub)}
+.en{margin-top:26px;border-top:1px dashed var(--line);padding-top:18px;font-size:12px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><span class="kanji">億街</span><small>OKUGAI — 入居受付</small></div>
+  <div class="badge">電脳億街 移住案内所<b id="open-state">2026.8.4 完全開街</b></div>
+  <h1>秘密基地に、入居する。</h1>
+  <p class="lead">入居はカード登録制です。<b style="color:var(--gold2)">2026年9月末までは移住費¥0</b>——カードを登録しても課金は発生しません（10月から月額¥9,800・月単位・縛りなし）。登録が確認でき次第、Discordの鍵（住人ロール）は自動で渡ります。</p>
+
+  <!-- 8/4前 -->
+  <div class="card hidden" id="pre-open">
+    <h2>🏗 完全開街は 8月4日</h2>
+    <p>入居受付は <b style="color:var(--gold2)">8/4 0時</b> にこのページで開始します。それまでは無料の見学席で街をご覧ください。</p>
+    <a class="btn btn-ghost" href="https://discord.gg/B6h8F6nMH5" target="_blank" rel="noopener">Discordの見学席へ(無料)</a>
+  </div>
+
+  <!-- STEP1: ログイン -->
+  <div class="card hidden" id="step-login">
+    <h2><span class="n">壱</span>Discordでログイン</h2>
+    <p>鍵の渡し先を間違えないよう、まずDiscordアカウントの確認をします。</p>
+    <button class="btn btn-primary" id="btn-login">Discordでログインする</button>
+  </div>
+
+  <!-- STEP2: サーバー未参加 -->
+  <div class="card hidden" id="step-guild">
+    <h2><span class="n">弐</span>まず街に入る</h2>
+    <p>あなたのDiscordアカウントはまだ億街サーバーに参加していません。先に見学席から街に入ってください（無料・数秒で終わります）。</p>
+    <a class="btn btn-primary" href="https://discord.gg/B6h8F6nMH5" target="_blank" rel="noopener">億街Discordに参加する</a>
+    <button class="btn btn-ghost" onclick="location.reload()">参加したら、ここを押して再確認</button>
+  </div>
+
+  <!-- STEP3: カード登録 -->
+  <div class="card hidden" id="step-pay">
+    <h2><span class="n">参</span>カードを登録して入居</h2>
+    <div class="me"><span class="tag">鍵の渡し先</span><b id="me-name">—</b></div>
+    <p style="margin-top:14px" id="pay-desc">下のボタンから決済ページ（テレコムクレジット）でカードを登録すると、数分以内に住人ロールが自動で付与されます。</p>
+    <p class="price" id="pay-price">いま登録 → 課金¥0（2026年9月末まで移住費¥0）</p>
+    <a class="btn btn-gold" id="btn-pay" href="#" target="_blank" rel="noopener">カードを登録して入居する</a>
+    <div class="warn">⚠ このリンクは<b>あなた専用</b>です（Discord IDと紐づいています）。他の人に共有しないでください。共有されたリンクで登録しても、鍵は元の本人にしか渡りません。</div>
+    <p class="note">対象は<b>秘密基地</b>プラン（¥9,800/月・10月から課金開始）。億荘（¥49,800/月）は審査制のため、<a href="https://okugai.net/lp/#register">入居希望の登録</a>後に個別でご案内します。</p>
+  </div>
+
+  <!-- 決済システム接続待ち -->
+  <div class="card hidden" id="step-wait">
+    <h2>🔌 決済システム 最終接続中</h2>
+    <p>入居受付は開始していますが、カード登録システムの開通作業中です。開通し次第、このページとLINE・Discordでお知らせします。少しだけお待ちください。</p>
+  </div>
+
+  <!-- すでに住人 -->
+  <div class="card hidden" id="step-done">
+    <h2>🔑 <span class="ok">すでに住人です</span></h2>
+    <p>あなたはもう鍵をお持ちです。マイページで住人証を確認できます。</p>
+    <a class="btn btn-primary" href="https://okugai.net/room/">マイページへ</a>
+  </div>
+
+  <div class="card" id="step-loading"><p><span class="spin"></span>　確認しています…</p></div>
+
+  <div class="en"><b>English:</b> Enrollment is card-registration based (¥0 until Sep 30, 2026; ¥9,800/mo from October). Sign in with Discord above, join the server if prompted, then follow your personal card-registration link. Your resident role is granted automatically after registration.</div>
+
+  <p class="foot">億街は教育・コミュニティサービスです。売買の指示や成果の保証は行いません。<br>
+  <a href="https://okugai.net/lp/tokushoho.html">特定商取引法に基づく表記</a> ／ <a href="https://okugai.net/lp/">移住案内(LP)へ戻る</a></p>
+</div>
+
+<script>
+// ================== 設定 ==================
+var SUPABASE_URL="https://xtrtbgymwsexzadrjedg.supabase.co";
+var SUPABASE_ANON_KEY="sb_publishable_lwLNwaraj021o7lVt4IjDA_KC4hksEQ";
+// テレコムクレジット(設定依頼書の完了後に値を入れる。空の間は「最終接続中」表示)
+var TELECOM={
+  clientip:"",       // 加盟店ID
+  courseAug:"",      // コースA: 毎月1日課金・1回目課金なし(8月入居: 0円カード認証)
+  courseSep:"",      // コースB: 毎月1日課金・1回目課金あり(9月入居)
+  courseOct:""       // コースC: 都度¥9,800・申込日起点(10月以降)
+};
+var OPEN_AT=Date.parse("2026-08-03T15:00:00Z"); // 8/4 0:00 JST
+// ==========================================
+
+function show(id){
+  ["pre-open","step-login","step-guild","step-pay","step-wait","step-done","step-loading"].forEach(function(x){
+    document.getElementById(x).classList.toggle("hidden",x!==id);
+  });
+}
+function jstNow(){return new Date(Date.now()+9*3600*1000);}
+function payLink(discordId){
+  // 月によってコース切替(JST)
+  var d=jstNow(),ym=d.getUTCFullYear()*100+(d.getUTCMonth()+1);
+  var base="https://secure.telecomcredit.co.jp/inetcredit/";
+  if(ym<=202608) return base+"adult/order.pl?clientip="+TELECOM.clientip+"&money=0&sendid="+encodeURIComponent(discordId)+"&rebill_param_id="+TELECOM.courseAug;
+  if(ym===202609) return base+"adult/order.pl?clientip="+TELECOM.clientip+"&money=0&sendid="+encodeURIComponent(discordId)+"&rebill_param_id="+TELECOM.courseSep;
+  return base+"order.pl?clientip="+TELECOM.clientip+"&money=9800&sendid="+encodeURIComponent(discordId)+"&rebill_param_id="+TELECOM.courseOct;
+}
+function priceText(){
+  var d=jstNow(),ym=d.getUTCFullYear()*100+(d.getUTCMonth()+1);
+  if(ym<=202609) return "いま登録 → 課金¥0（2026年9月末まで移住費¥0・課金は10/1から）";
+  return "月額 ¥9,800（税込・月単位・縛りなし）";
+}
+
+var isOpen=Date.now()>=OPEN_AT;
+if(isOpen){document.getElementById("open-state").textContent="完全開街——入居受付中";}
+
+if(!isOpen){
+  show("pre-open");
+}else{
+  var s=document.createElement("script");
+  s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js";
+  s.onload=async function(){
+    var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    document.getElementById("btn-login").onclick=function(){
+      sb.auth.signInWithOAuth({provider:"discord",options:{redirectTo:location.href.split("#")[0]}});
+    };
+    var sess=(await sb.auth.getSession()).data.session;
+    if(!sess){show("step-login");return;}
+    try{
+      var r=await fetch(SUPABASE_URL+"/functions/v1/join-info",{
+        headers:{Authorization:"Bearer "+sess.access_token,apikey:SUPABASE_ANON_KEY}
+      });
+      var info=await r.json();
+      if(!info.ok){show("step-login");return;}
+      if(info.isJunin){show("step-done");return;}
+      if(!info.inGuild){show("step-guild");return;}
+      if(!TELECOM.clientip){show("step-wait");return;}
+      document.getElementById("me-name").textContent=(info.name||"あなた")+"（Discord）";
+      document.getElementById("pay-price").textContent=priceText();
+      document.getElementById("btn-pay").href=payLink(info.discordId);
+      show("step-pay");
+    }catch(e){show("step-login");}
+  };
+  document.head.appendChild(s);
+}
+</script>
+</body>
+</html>
