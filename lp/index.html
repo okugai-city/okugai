@@ -1174,7 +1174,7 @@ body{padding-bottom:150px}
     </form>
     <p id="reg-msg" class="hero-note" style="margin-top:12px"></p>
     <p class="hero-note" style="margin-top:6px">メール派の方はこちら。移住案内を順次お送りします。</p>
-    <p class="hero-note" style="margin-top:18px">※ 月額プラン(¥9,800/月)の決済を受付中です。先行リリースの無料期間はLINE登録のみで決済不要——今すぐ入居できます。</p>
+    <p class="hero-note" style="margin-top:18px">※ 入居はカード登録制。2026年9月末までは移住費¥0(課金なし)、10月から月額¥9,800です。</p>
   </div>
 </section>
 
@@ -1226,7 +1226,7 @@ body{padding-bottom:150px}
 <a class="totop" href="#" aria-label="ページの先頭へ戻る" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><svg viewBox="0 0 24 24"><path d="m6.5 14.5 5.5-5.5 5.5 5.5"/></svg></a>
 
 <div class="sticky-cta">
-  <p class="scta-note">先行リリース中 移住費¥0 / 受付中</p>
+  <p class="scta-note" id="open-snote">先行リリース 移住費¥0 / 受付は8/4 0時から</p>
   <a class="btn btn-primary" href="#register">LINEで事前登録(受付は8/4から)</a>
 </div>
 
@@ -1492,6 +1492,7 @@ var ROOM_URL="../room/";
 <script>
 (function(){if(Date.now()<Date.parse("2026-08-03T15:00:00Z"))return;
 var b=document.getElementById("open-badge");if(b)b.textContent="完全開街——入居受付中";
+var sn=document.getElementById("open-snote");if(sn)sn.textContent="先行リリース中 移住費¥0 / 入居受付中";
 var c=document.getElementById("open-cta");if(c){c.textContent="秘密基地に移住する(9月末まで¥0)";c.setAttribute("href","https://okugai.net/join/");}})();
 </script>
 </body>
