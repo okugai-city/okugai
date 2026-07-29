@@ -471,7 +471,15 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
   function esc(t){var d=document.createElement('div');d.textContent=t==null?'':String(t);return d.innerHTML}
   function fmt(n){return Number(n||0).toLocaleString('ja-JP')}
   var PLAN={free:'見学',kichi:'秘密基地',okuso:'億荘'};
-  var OPERATORS=['k-kunugi@a-dot.jp','kenya0513@icloud.com']; /* 運営者リスト: email か Discordユーザー名。さらに @a-dot.jp のメールは自動で運営者扱い(下のenter内) */
+  /* 運営者リスト: メールアドレスのSHA-256ハッシュで照合(生アドレスをソースに載せない)。@a-dot.jpのメールは自動で運営者扱い(下のenter内) */
+  var OPERATOR_HASHES=['2b3a464367d1e156caaea820b648f87020d3b444a7bbc9c07feedc904077693e','39bf60a8c5a9c51ee08d098f862225b1b880f611eaf473ca012fd4027cd70387'];
+  async function sha256hex(s){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')}
+  async function isOperator(email){
+    var e=String(email||'').toLowerCase();
+    if(e.slice(-9)==='@a-dot.jp')return true;
+    if(!e)return false;
+    try{return OPERATOR_HASHES.indexOf(await sha256hex(e))>=0}catch(err){return false}
+  }
   var OYAKATA={name:'大家',img:'../assets/residents/mayor.jpg?v=20260722',plan:'運営',banchi:'あの塔',since:'街の主宰'};
   /* 住人キャラの中の人(Discordユーザー名・小文字) → キャラ表示定義。住人カウント=plan「住人」 */
   var CHARAS={
@@ -992,8 +1000,11 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
     else{document.getElementById('id-face').textContent=name.slice(0,1)}
     document.getElementById('room-title').textContent='おかえりなさい、'+name+'。';
     var _em=(user.email||'').toLowerCase();
-    if(_em.slice(-9)==='@a-dot.jp'||OPERATORS.indexOf(user.email)>=0||OPERATORS.indexOf(name)>=0||OPERATORS.indexOf(meta.name||'')>=0) setupPersona(name, meta.avatar_url);
-    else{var _un=String(meta.full_name||meta.name||'').toLowerCase().replace(/#\d+$/,'');if(CHARAS[_un])setupPersona(name, meta.avatar_url, CHARAS[_un]);}
+    isOperator(_em).then(function(op){
+      if(op){setupPersona(name, meta.avatar_url);return}
+      var _un=String(meta.full_name||meta.name||'').toLowerCase().replace(/#\d+$/,'');
+      if(CHARAS[_un])setupPersona(name, meta.avatar_url, CHARAS[_un]);
+    });
 
     sb.from('profiles').select('*').eq('id',user.id).maybeSingle().then(function(r){
       var p=r.data||{};
