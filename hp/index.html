@@ -605,7 +605,7 @@ body{padding-bottom:150px}
     <p class="mission">あの塔を、<em>見上げるだけ</em>で終わるのか。</p>
     <p class="mission-sub">億り人を、量産する街——<b>億街</b>。</p>
     <p class="lead">ここは、投資・FXを専門とする住人たちが「勝ち方の技術を、組織で継承する」ために築いた電脳の街。<br>地図には載っていないが、扉はいつでも開いている。</p>
-    <p class="hero-offer">先行リリース中 移住費¥0・受付中</p>
+    <p class="hero-offer" id="open-notice">2026.8.4 完全開街——入居受付は8/4 0時から(9月末まで移住費¥0)</p>
     <div class="hero-ctas">
       <a class="btn btn-primary" href="../lp/index.html">億街サロンへ移住する</a>
       <a class="btn btn-kairan" href="#kairan">回覧板に登録する(無料)</a>
@@ -800,7 +800,7 @@ body{padding-bottom:150px}
           <h3>億街サロン<small>通称「秘密基地」</small></h3>
           <p>億街の心臓部。実績あるシステムの利用、住人のトレードのリアルタイム公開(リアルタイムトレード)、特別ツール。すべてはこの基地の中から始まる。</p>
           <p class="access"><b>入り方</b>移住(月額)。誰でも移住できる</p>
-          <span class="status open">移住登録 受付中 → 登録へ</span>
+          <span class="status open" id="open-status">8/4 完全開街——受付は8/4 0時から</span>
         </div>
       </a>
       <div class="fac">
@@ -1011,7 +1011,7 @@ body{padding-bottom:150px}
 <a class="totop" href="#top" aria-label="ページの先頭へ戻る"><svg viewBox="0 0 24 24"><path d="m6.5 14.5 5.5-5.5 5.5 5.5"/></svg></a>
 
 <div class="sticky-cta">
-  <p class="scta-note">移住登録 受付中 / 先行リリース中 移住費¥0</p>
+  <p class="scta-note" id="open-scta">2026.8.4 完全開街 / 9月末まで移住費¥0</p>
   <div class="scta-row">
     <a class="btn btn-line-cta" href="#kairan">街だより(無料)</a>
     <a class="btn btn-grad-cta" href="../lp/index.html">移住案内を見る(いま¥0)</a>
@@ -1181,5 +1181,11 @@ var ROOM_URL="../room/";
 })();
 </script>
 <script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href*="lin.ee"],a[href*="discord.gg"]');if(!a||typeof gtag!=="function")return;gtag("event",a.href.indexOf("lin.ee")>-1?"line_register_click":"discord_join_click",{page:location.pathname});});</script>
+<script>
+(function(){if(Date.now()<Date.parse("2026-08-03T15:00:00Z"))return;/* =8/4 0:00 JST */
+var n=document.getElementById("open-notice");if(n)n.textContent="完全開街——入居受付中(カード登録・9月末まで移住費¥0)";
+var st=document.getElementById("open-status");if(st)st.textContent="入居受付中 → 登録へ";
+var sc=document.getElementById("open-scta");if(sc)sc.textContent="入居受付中 / 9月末まで移住費¥0";})();
+</script>
 </body>
 </html>
