@@ -304,8 +304,8 @@ table.cmp{width:100%;min-width:640px;border-collapse:separate;border-spacing:0;f
 .btn-free:hover{border-color:var(--lime);box-shadow:0 8px 30px rgba(89,242,162,.2)}
 .btn-gold{background:linear-gradient(90deg,#e8b95c,#f6d992);color:#05070d;font-weight:900;box-shadow:0 10px 36px rgba(232,185,92,.25)}
 .btn-gold:hover{box-shadow:0 14px 44px rgba(232,185,92,.4)}
-.plan .term{font-size:11px;color:var(--sub);margin:-6px 0 10px;letter-spacing:.04em}
-.plan .perday{font-size:11.5px;color:var(--lime);font-weight:900;margin:0 0 14px;letter-spacing:.04em}
+.plan .term{font-size:11px;color:var(--sub);margin:0 0 4px;letter-spacing:.04em}
+.plan .perday{font-size:11.5px;color:var(--lime);font-weight:900;margin:0;letter-spacing:.04em}
 .plan{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:40px 36px;position:relative;display:flex;flex-direction:column}
 .plan.featured{border:1.5px solid var(--violet);background:linear-gradient(180deg,rgba(141,123,255,.09),var(--panel));box-shadow:0 24px 70px rgba(141,123,255,.12)}
 .plan .tag{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--grad);color:#05070d;font-size:11.5px;font-weight:900;border-radius:999px;padding:6px 20px;white-space:nowrap;letter-spacing:.04em}
@@ -322,7 +322,7 @@ table.cmp{width:100%;min-width:640px;border-collapse:separate;border-spacing:0;f
 .plan .btn{width:100%;margin-top:auto;justify-content:center}
 .plan ul{margin-bottom:26px}
 /* 3列表示ではヘッダー/特典リスト/ボタンの行位置をカード間で揃える */
-@media(min-width:981px){.plan{display:grid;grid-template-rows:subgrid;grid-row:span 3;align-content:start}}
+@media(min-width:981px){.plan{display:grid;grid-template-rows:subgrid;grid-row:span 4;align-content:start}.plan ul{margin-top:0}}
 /* founding perks */
 @media(max-width:760px){}
 .perks li b{display:block;color:var(--text);font-weight:700;margin-bottom:4px;font-size:13.5px}
@@ -601,8 +601,7 @@ table{font-variant-numeric:tabular-nums}
 }
 .reg-wrap .line-qr{margin:16px auto 0;max-width:340px;text-align:left}
 .plan-head{display:flex;flex-direction:column;justify-content:flex-start;text-align:center}
-.pnotes{display:flex;flex-direction:column}
-@media(min-width:901px){.pnotes{min-height:102px}}
+.pnotes{margin-top:13px;text-align:center}
 .plan-head .tag{align-self:center}
 
 /* ===== 追従バー対応: 本文の逃げ場・トップへ・フッタータップ領域 ===== */
@@ -1021,8 +1020,6 @@ body{padding-bottom:150px}
         <div class="tag">おすすめ / 先行リリース 無料</div>
         <h3>秘密基地<small>RESIDENT</small></h3>
         <div class="price">¥9,800<small>/月(税込)</small></div>
-        <div class="pnotes">        <div class="term">月々の契約・いつでも退去OK・また戻れる</div>
-        <div class="perday">先着枠の終了後は ¥9,800/月(1日あたり 約326円)</div></div>
         </div>
         <ul>
           <li class="on">システムの利用権(スタンダード機)</li>
@@ -1031,13 +1028,13 @@ body{padding-bottom:150px}
           <li class="on">インジケーター・検証ツールの使用権+住人割引</li>
         </ul>
         <a class="btn btn-primary js-checkout" data-plan="standard" id="open-cta" href="#register">入居受付は8/4 0時から</a>
+        <div class="pnotes"><div class="term">月々の契約・いつでも退去OK・また戻れる</div><div class="perday">先着枠の終了後は ¥9,800/月(1日あたり 約326円)</div></div>
       </div>
       <div class="plan okuso">
         <div class="plan-head">
         <div class="tag gold">定員制 / 審査あり</div>
         <h3>億荘<small>OKUSO</small></h3>
         <div class="price">¥49,800<small>/月(税込)</small></div>
-        <div class="pnotes">        <div class="term">月々の契約・退去した部屋は次の入居者へ(再入居は再審査)</div></div>
         </div>
         <ul>
           <li class="on">秘密基地プランの全特典</li>
@@ -1047,6 +1044,7 @@ body{padding-bottom:150px}
           <li class="on">オフ会</li>
         </ul>
         <a class="btn btn-gold" href="#register">入居希望を登録する</a>
+        <div class="pnotes"><div class="term">月々の契約・退去した部屋は次の入居者へ(再入居は再審査)</div></div>
       </div>
     </div>
   </div>
