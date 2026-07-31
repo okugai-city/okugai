@@ -1293,5 +1293,16 @@ var ROOM_URL="../../room/";
 </script>
 {SNIP}
 <script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href*="lin.ee"],a[href*="discord.gg"]');if(!a||typeof gtag!=="function")return;gtag("event",a.href.indexOf("lin.ee")>-1?"line_register_click":"discord_join_click",{page:location.pathname});});</script>
+<script>
+(function(){if(Date.now()<Date.parse("2026-08-03T15:00:00Z"))return;
+document.querySelectorAll('a').forEach(function(a){var t=a.textContent||'';
+  if(/enrollment opens Aug 4|Pre-register to move in/i.test(t)){
+    a.textContent="Move into the hideout (August move-ins: ¥0 until Sep 30)";
+    a.setAttribute('href','https://okugai.net/join/');a.removeAttribute('target');
+  }});
+var ho=document.querySelector('.hero-offer');if(ho)ho.textContent="OKUGAI is open — enrollment live (join in August: ¥0 until Sep 30)";
+var b=document.getElementById('open-badge');if(b)b.textContent="OPEN — enrollment live";
+})();
+</script>
 </body>
 </html>
