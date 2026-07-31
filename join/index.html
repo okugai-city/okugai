@@ -168,8 +168,10 @@ if(!isOpen){
     };
     var sess=(await sb.auth.getSession()).data.session;
     if(!sess){show("step-login");return;}
+    // LP/HPで保存された紹介コード(30日有効)を成果記録用に引き渡す
+    var ref=null;try{var rd=JSON.parse(localStorage.getItem("okugai_ref")||"null");if(rd&&rd.c&&Date.now()-rd.t<30*86400e3)ref=rd.c;}catch(e){}
     try{
-      var r=await fetch(SUPABASE_URL+"/functions/v1/join-info",{
+      var r=await fetch(SUPABASE_URL+"/functions/v1/join-info"+(ref?"?ref="+encodeURIComponent(ref):""),{
         headers:{Authorization:"Bearer "+sess.access_token,apikey:SUPABASE_ANON_KEY}
       });
       var info=await r.json();
