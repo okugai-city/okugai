@@ -121,10 +121,10 @@ var SUPABASE_URL="https://xtrtbgymwsexzadrjedg.supabase.co";
 var SUPABASE_ANON_KEY="sb_publishable_lwLNwaraj021o7lVt4IjDA_KC4hksEQ";
 // テレコムクレジット(設定依頼書の完了後に値を入れる。空の間は「最終接続中」表示)
 var TELECOM={
-  clientip:"",       // 加盟店ID
-  courseAug:"",      // コースA: 毎月1日課金・1回目課金なし(8月入居: 0円カード認証)
-  courseSep:"",      // (予備)コースB: 毎月1日課金・1回目課金あり — 現行フローでは未使用
-  courseOct:""       // コースC: 都度¥9,800・申込日起点(9月以降の入居)
+  clientip:"30126",              // 加盟店ID(テレコム発行・2026-07-31)
+  courseAug:"1month9800en_no",   // 8月入居: カード認証+継続(1回目課金なし→10/1から9,800円)
+  courseSep:"1month9800en",      // (予備)テレコム発行済み・現行フローでは未使用
+  courseOct:""                   // 🔴9月以降の入居用。課金起点(月特定日/申込日起点)のテレコム回答待ち — 回答前に入れないこと
 };
 var OPEN_AT=Date.parse("2026-08-03T15:00:00Z"); // 8/4 0:00 JST
 // ==========================================
@@ -135,13 +135,17 @@ function show(id){
   });
 }
 function jstNow(){return new Date(Date.now()+9*3600*1000);}
-function payLink(discordId){
-  // 月によってコース切替(JST)
+function monthCourse(){
+  // 月によってコース切替(JST)。コース未設定の月はnull(=接続中表示)
   var d=jstNow(),ym=d.getUTCFullYear()*100+(d.getUTCMonth()+1);
-  var base="https://secure.telecomcredit.co.jp/inetcredit/";
-  if(ym<=202608) return base+"adult/order.pl?clientip="+TELECOM.clientip+"&money=0&sendid="+encodeURIComponent(discordId)+"&rebill_param_id="+TELECOM.courseAug;
-  // 9月以降の入居は課金あり(都度コース)
-  return base+"order.pl?clientip="+TELECOM.clientip+"&money=9800&sendid="+encodeURIComponent(discordId)+"&rebill_param_id="+TELECOM.courseOct;
+  if(ym<=202608) return TELECOM.courseAug?{kind:"auth",course:TELECOM.courseAug}:null;
+  return TELECOM.courseOct?{kind:"pay",course:TELECOM.courseOct}:null;
+}
+function payLink(memberNo){
+  // 接続仕様書準拠: カード認証=adult/order.pl(moneyなし) / 都度決済=secure/order.pl(money必須)
+  var c=monthCourse(),base="https://secure.telecomcredit.co.jp/inetcredit/";
+  if(c.kind==="auth") return base+"adult/order.pl?clientip="+TELECOM.clientip+"&sendid="+encodeURIComponent(memberNo)+"&rebill_param_id="+c.course;
+  return base+"secure/order.pl?clientip="+TELECOM.clientip+"&money=9800&sendid="+encodeURIComponent(memberNo)+"&rebill_param_id="+c.course;
 }
 function priceText(){
   var d=jstNow(),ym=d.getUTCFullYear()*100+(d.getUTCMonth()+1);
@@ -172,10 +176,10 @@ if(!isOpen){
       if(!info.ok){show("step-login");return;}
       if(info.isJunin){show("step-done");return;}
       if(!info.inGuild){show("step-guild");return;}
-      if(!TELECOM.clientip){show("step-wait");return;}
+      if(!TELECOM.clientip||!monthCourse()||!info.memberNo){show("step-wait");return;}
       document.getElementById("me-name").textContent=(info.name||"あなた")+"（Discord）";
       document.getElementById("pay-price").textContent=priceText();
-      document.getElementById("btn-pay").href=payLink(info.discordId);
+      document.getElementById("btn-pay").href=payLink(info.memberNo);
       show("step-pay");
     }catch(e){show("step-login");}
   };
