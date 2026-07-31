@@ -113,6 +113,7 @@ footer{border-top:1px solid var(--line);padding:20px 0;font-size:11px;color:var(
         <button class="on" data-atab="members">顧客台帳</button>
         <button data-atab="points">ポイント台帳</button>
         <button data-atab="alerts">アラート</button>
+        <button data-atab="aff">アフィリエイト</button>
       </nav>
 
       <section data-atab="members">
@@ -135,6 +136,24 @@ footer{border-top:1px solid var(--line);padding:20px 0;font-size:11px;color:var(
         <div class="alert-block"><h3>オンボ漏れ(課金済み・Discord未参加)</h3>
           <div class="tbl-wrap"><table class="tbl"><thead><tr><th>会員</th><th>プラン</th><th>入会日</th></tr></thead><tbody id="a-onboard"></tbody></table></div>
         </div>
+      </section>
+
+      <section data-atab="aff" hidden>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <input id="af-code" placeholder="AF-TANAKA" style="width:130px">
+          <input id="af-name" placeholder="氏名" style="width:120px">
+          <input id="af-uk" type="number" value="5000" title="基地単価" style="width:80px">
+          <input id="af-uo" type="number" value="15000" title="億荘単価" style="width:80px">
+          <button class="ok" id="af-add">パートナー追加</button>
+        </div>
+        <div class="tbl-wrap"><table class="tbl"><thead>
+          <tr><th>コード</th><th>氏名</th><th>登録</th><th>課金成立</th><th>確定額</th><th>支払済</th><th>未払い</th><th></th></tr>
+        </thead><tbody id="af-body"><tr><td colspan="8" class="none-note">読み込み中…</td></tr></tbody></table></div>
+        <p class="none-note" style="margin:8px 0 4px">支払い履歴</p>
+        <div class="tbl-wrap"><table class="tbl"><thead>
+          <tr><th>月</th><th>コード</th><th>件数</th><th>金額</th><th>支払日</th></tr>
+        </thead><tbody id="af-payouts"><tr><td colspan="5" class="none-note">—</td></tr></tbody></table></div>
+        <p class="none-note">成果地点=初回課金の成立(テレコム決済データと自動突合)。紹介リンクは https://okugai.net/lp/?ref=コード</p>
       </section>
     </div>
 
@@ -176,7 +195,7 @@ var SUPABASE_ANON_KEY="sb_publishable_lwLNwaraj021o7lVt4IjDA_KC4hksEQ";
       sb.from('profiles').select('is_admin').eq('id',session.user.id).maybeSingle().then(function(r){
         if(!(r.data&&r.data.is_admin)){denied.hidden=false;return}
         document.getElementById('logout').hidden=false;dash.hidden=false;
-        initTabs();loadStats();loadMembers();loadPoints();loadAlerts();
+        initTabs();loadStats();loadMembers();loadPoints();loadAlerts();loadAffiliates();
       });
     });
   }
@@ -260,6 +279,48 @@ var SUPABASE_ANON_KEY="sb_publishable_lwLNwaraj021o7lVt4IjDA_KC4hksEQ";
         return '<tr><td>'+esc(m.display_name||'(名無し)')+'</td><td>'+esc(PLAN[m.plan]||m.plan)+'</td><td>'+esc(String(m.created_at||'').slice(0,10))+'</td></tr>';
       }).join(''):'<tr><td colspan="3" class="none-note">オンボ漏れはありません。</td></tr>';
     });
+  }
+
+  function loadAffiliates(){
+    Promise.all([
+      sb.from('affiliates').select('*').order('created_at'),
+      sb.from('profiles').select('member_no,referred_by,display_name').not('referred_by','is',null),
+      sb.from('events').select('detail,created_at').eq('type','telecom_payment').limit(1000),
+      sb.from('affiliate_payouts').select('*').order('created_at',{ascending:false})
+    ]).then(function(rs){
+      var affs=rs[0].data||[],profs=rs[1].data||[],pays=rs[2].data||[],outs=rs[3].data||[];
+      var paid={};pays.forEach(function(e){var d=e.detail||{};if(d.sendid)paid[String(d.sendid)]=d.plan||'kichi'});
+      var b=document.getElementById('af-body');
+      if(!affs.length){b.innerHTML='<tr><td colspan="8" class="none-note">パートナー未登録。上のフォームから追加。</td></tr>'}
+      else b.innerHTML=affs.map(function(a){
+        var regs=profs.filter(function(p){return p.referred_by===a.code});
+        var conv=regs.filter(function(p){return paid[String(p.member_no)]});
+        var amt=conv.reduce(function(x,p){return x+(paid[String(p.member_no)]==='okuso'?a.unit_okuso:a.unit_kichi)},0);
+        var paidAmt=outs.filter(function(o){return o.code===a.code}).reduce(function(x,o){return x+o.amount},0);
+        var unpaid=amt-paidAmt;
+        var op=unpaid>0?'<button class="ok" data-afpay="'+esc(a.code)+'" data-cnt="'+conv.length+'" data-amt="'+unpaid+'">支払記録</button>':'—';
+        return '<tr><td><b>'+esc(a.code)+'</b></td><td>'+esc(a.name)+'</td><td>'+regs.length+'</td><td>'+conv.length+'</td>'+
+               '<td>¥'+fmt(amt)+'</td><td>¥'+fmt(paidAmt)+'</td><td><b>¥'+fmt(unpaid)+'</b></td><td class="ops">'+op+'</td></tr>';
+      }).join('');
+      document.getElementById('af-payouts').innerHTML=outs.length?outs.map(function(o){
+        return '<tr><td>'+esc(o.month)+'</td><td>'+esc(o.code)+'</td><td>'+o.cnt+'</td><td>¥'+fmt(o.amount)+'</td><td>'+esc(o.paid_at||'')+'</td></tr>';
+      }).join(''):'<tr><td colspan="5" class="none-note">支払い実績はまだありません。</td></tr>';
+      b.onclick=function(ev){
+        var btn=ev.target.closest('button[data-afpay]');if(!btn)return;
+        var m=new Date().toISOString().slice(0,7);
+        if(!window.confirm(btn.dataset.afpay+' の未払い ¥'+fmt(btn.dataset.amt)+' を「'+m+'支払済み」として記録しますか？(実際の振込は別途)'))return;
+        sb.from('affiliate_payouts').insert({code:btn.dataset.afpay,month:m,cnt:Number(btn.dataset.cnt),amount:Number(btn.dataset.amt),paid_at:new Date().toISOString().slice(0,10)})
+          .then(function(r){if(r.error)window.alert('記録失敗: '+r.error.message);loadAffiliates()});
+      };
+    });
+    var add=document.getElementById('af-add');
+    add.onclick=function(){
+      var code=document.getElementById('af-code').value.trim(),name=document.getElementById('af-name').value.trim();
+      if(!/^AF-[A-Za-z0-9_-]{2,20}$/.test(code)){window.alert('コードは AF-英数字 の形式で');return}
+      if(!name){window.alert('氏名を入れてください');return}
+      sb.from('affiliates').insert({code:code,name:name,unit_kichi:Number(document.getElementById('af-uk').value)||5000,unit_okuso:Number(document.getElementById('af-uo').value)||15000,agreed_at:new Date().toISOString().slice(0,10)})
+        .then(function(r){if(r.error)window.alert('追加失敗: '+r.error.message);else{document.getElementById('af-code').value='';document.getElementById('af-name').value='';loadAffiliates()}});
+    };
   }
 })();
 </script>
