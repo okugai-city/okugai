@@ -596,8 +596,8 @@ body{padding-bottom:150px}
 
   /* --- メニュータイル(ヒーロー直下・アプリの入口) --- */
   .m-hub{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--line)}
-  .m-hub a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px 10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--text);font-size:10.5px;font-weight:700;letter-spacing:.04em}
-  .m-hub .ic{width:18px;height:18px;color:var(--cyan)}
+  .m-hub a{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px 11px;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--text);font-size:12px;font-weight:700;letter-spacing:.06em}
+  .m-hub small{font-size:7.5px;font-weight:900;letter-spacing:.3em;text-indent:.3em;color:var(--cyan);opacity:.85}
   .okite-band{padding:10px 0}
   .okite-track{font-size:12px}
 
@@ -686,10 +686,11 @@ body{padding-bottom:150px}
 
   /* --- 下部タブバー(2本ボタンを置換) --- */
   .sticky-cta{display:none}
-  .m-tabbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:2px;background:rgba(5,7,13,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
-  .m-tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 0 5px;color:var(--sub);font-size:9.5px;font-weight:700;letter-spacing:.04em;border-radius:12px}
-  .m-tabbar .ic{width:19px;height:19px}
+  .m-tabbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:2px;background:rgba(5,7,13,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:7px 6px calc(7px + env(safe-area-inset-bottom))}
+  .m-tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 7px;color:var(--sub);font-size:11.5px;font-weight:700;letter-spacing:.08em;border-radius:12px}
+  .m-tabbar small{font-size:7px;font-weight:900;letter-spacing:.26em;text-indent:.26em;color:var(--cyan);opacity:.7}
   .m-tabbar a.primary{background:var(--grad);color:#05070d;font-weight:900}
+  .m-tabbar a.primary small{color:#05070d;opacity:.75}
 }
 </style>
 </head>
@@ -765,12 +766,12 @@ body{padding-bottom:150px}
 
 <!-- ===== モバイル専用メニュータイル(600px以下のみ表示) ===== -->
 <nav class="m-hub" aria-label="街のメニュー">
-  <a href="#story"><svg class="ic"><use href="#i-moon"/></svg>街の物語</a>
-  <a href="#okite"><svg class="ic"><use href="#i-bolt"/></svg>街の掟</a>
-  <a href="#residents"><svg class="ic"><use href="#i-eye"/></svg>住人</a>
-  <a href="#facilities"><svg class="ic"><use href="#i-skyline"/></svg>街の施設</a>
-  <a href="#news"><svg class="ic"><use href="#i-wave"/></svg>告知板</a>
-  <a href="#guide"><svg class="ic"><use href="#i-door"/></svg>歩き方</a>
+  <a href="#story"><small>STORY</small>街の物語</a>
+  <a href="#okite"><small>RULES</small>街の掟</a>
+  <a href="#residents"><small>RESIDENTS</small>住人</a>
+  <a href="#facilities"><small>FACILITIES</small>街の施設</a>
+  <a href="#news"><small>BULLETIN</small>告知板</a>
+  <a href="#guide"><small>GUIDE</small>歩き方</a>
 </nav>
 
 <!-- ===== OKITE MARQUEE ===== -->
@@ -1179,10 +1180,10 @@ body{padding-bottom:150px}
 
 <!-- ===== モバイル下部タブバー(600px以下のみ表示) ===== -->
 <nav class="m-tabbar" aria-label="モバイルナビゲーション">
-  <a href="#top"><svg class="ic"><use href="#i-house"/></svg>街トップ</a>
-  <a href="../media/index.html"><svg class="ic"><use href="#i-tower"/></svg>展望塔</a>
-  <a href="#kairan"><svg class="ic"><use href="#i-wave"/></svg>回覧板</a>
-  <a class="primary" href="../lp/index.html"><svg class="ic"><use href="#i-key"/></svg>移住案内</a>
+  <a href="#top"><small>TOP</small>街トップ</a>
+  <a href="../media/index.html"><small>TOWER</small>展望塔</a>
+  <a href="#kairan"><small>LETTER</small>回覧板</a>
+  <a class="primary" href="../lp/index.html"><small>JOIN</small>移住案内</a>
 </nav>
 
 <script>
