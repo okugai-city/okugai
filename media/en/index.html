@@ -142,5 +142,64 @@ var GA4_ID="G-6B9W4B22QY";var CLARITY_ID="";
 if(GA4_ID){var _g=document.createElement('script');_g.async=true;_g.src='https://www.googletagmanager.com/gtag/js?id='+GA4_ID;document.head.appendChild(_g);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',GA4_ID);}
 if(CLARITY_ID){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CLARITY_ID);}
 </script>
+
+<style>
+/* ============================================================
+   モバイル専用設計(600px以下) — 縮小ではなく別レイアウト
+   ============================================================ */
+@media(max-width:600px){
+  body{font-size:14px;line-height:1.75;padding-bottom:86px}
+  .container{padding:0 16px}
+  section{padding-top:34px;padding-bottom:34px}
+  h2{font-size:19px}
+  .sec-head{margin-bottom:16px}
+  .sec-label{font-size:10px;margin-bottom:8px}
+  .sec-lead{font-size:12.5px;margin-top:8px}
+
+  /* hero */
+  .hero{padding:38px 0 34px}
+  .hero .kicker{font-size:9px;margin-bottom:16px}
+  .hero h1{font-size:27px}
+  .hero p{margin-top:12px;font-size:12.5px;line-height:1.85}
+  .salon-banner{margin-top:18px;padding:14px 16px;gap:10px}
+  .sb-label{font-size:8.5px;margin-bottom:4px}
+  .sb-title{font-size:12.5px;line-height:1.6}
+  .sb-go{padding:11px 16px;font-size:12px}
+
+  /* feature: 2列のコンパクトタイル */
+  .feature{grid-template-columns:1fr 1fr;gap:8px}
+  .feat{padding:13px 12px}
+  .feat .flabel{font-size:8px;margin-bottom:6px}
+  .feat h3{font-size:14px;white-space:normal;margin-bottom:0}
+  .feat p{display:none}
+  .feat .go{padding-top:10px;font-size:10.5px}
+  .feat::after{font-size:20px;top:10px;right:12px}
+
+  /* columns: スリム記事リスト */
+  .cluster{margin-bottom:22px}
+  .cluster-t{font-size:16px;margin-bottom:10px;text-align:left;border-left:3px solid var(--cyan);padding-left:12px}
+  .cluster-t small{font-size:9.5px;margin-top:3px}
+  .col-grid{gap:8px}
+  .colcard{border-radius:13px}
+  .colcard .body{padding:12px 14px}
+  .colcard .meta{font-size:9px;margin-bottom:5px;gap:6px}
+  .colcard h3{font-size:13.5px;line-height:1.65;padding-right:30px}
+  .colcard p{display:none}
+  .colcard .go{display:none}
+  .colcard::after{font-size:26px;top:10px;right:12px}
+
+  /* cta / footer */
+  .salon-cta p{font-size:12.5px;margin-bottom:16px}
+  .salon-cta .btn{padding:13px 26px;font-size:13.5px}
+  .kmini{padding:18px 16px;margin:24px 0}
+  .kmini h2,.kmini .kmt{font-size:15px}
+  footer{padding:26px 0;font-size:11px}
+  .footgrid{grid-template-columns:1fr;gap:18px}
+  .scta-note{font-size:9.5px;margin-bottom:6px}
+  .scta-row{gap:6px}
+  .scta-mini,.scta-btn{font-size:11px;padding:12px 4px}
+  .totop{display:none}
+}
+</style>
 </body>
 </html>
