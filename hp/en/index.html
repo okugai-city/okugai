@@ -619,6 +619,7 @@ body{padding-bottom:150px}
   .okite p{font-size:12px}
 
   /* --- residents: 小型トレカ --- */
+  .res-grid{margin:0 -16px;padding-left:16px;padding-right:16px}
   .res-grid .res{flex:0 0 62%;max-width:230px}
   .res .visual{height:150px}
   .res .visual img{max-height:none}
@@ -946,7 +947,7 @@ body{padding-bottom:150px}
           <h3>OKUGAI Salon<small>A.K.A. "THE HIDEOUT"</small></h3>
           <p>The heart of OKUGAI. Access to proven systems, residents' trades broadcast in real time, special tools. Everything starts inside this hideout.</p>
           <p class="access"><b>ENTRY</b>Monthly residency. Anyone can move in</p>
-          <span class="status open">PRE-REGISTRATION OPEN → SIGN UP</span>
+          <span class="status open" id="open-status">GRAND OPENING AUG 8 — SIGN-UP FROM 0:00 JST</span>
         </div>
       </a>
       <div class="fac">
@@ -1345,6 +1346,7 @@ document.querySelectorAll('a').forEach(function(a){var t=a.textContent||'';
   }});
 var ho=document.querySelector('.hero-offer');if(ho)ho.textContent="OKUGAI is open — enrollment live (join in August: ¥0 until Sep 30)";
 var b=document.getElementById('open-badge');if(b)b.textContent="OPEN — enrollment live";
+var st=document.getElementById('open-status');if(st)st.textContent="ENROLLMENT OPEN → SIGN UP";
 })();
 </script>
 <script>
