@@ -994,5 +994,44 @@ var GA4_ID="G-6B9W4B22QY";var CLARITY_ID="";
 if(GA4_ID){var _g=document.createElement('script');_g.async=true;_g.src='https://www.googletagmanager.com/gtag/js?id='+GA4_ID;document.head.appendChild(_g);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',GA4_ID);}
 if(CLARITY_ID){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CLARITY_ID);}
 </script>
+
+<style>
+/* ===== モバイル専用設計(600px以下) — 口座比較 ===== */
+@media(max-width:600px){
+  body{font-size:14px;line-height:1.75}
+  .container{padding:0 16px}
+  section{padding-top:30px;padding-bottom:30px}
+  .hero-band{padding:36px 0 30px}
+  .hero h1{font-size:23px}
+  .hero p{font-size:12.5px;margin-top:10px}
+  .hero .label{font-size:10px;margin-bottom:8px}
+  h2{font-size:19px}
+  .bk{grid-template-columns:48px 1fr;gap:8px 12px;padding:15px 14px;margin-bottom:12px;border-radius:14px;align-items:start}
+  .bk-logo{width:48px;height:48px;border-radius:10px}
+  .bk-logo b{font-size:10px}
+  .bk-logo small{font-size:7.5px}
+  .bk .rank{font-size:8.5px;letter-spacing:.16em;margin-bottom:4px}
+  .bk h3{font-size:16px}
+  .bk .tags{margin:7px 0;gap:5px}
+  .bk .tags span{font-size:9px;padding:2px 8px}
+  .bk-spec{margin:8px 0 4px}
+  .bk-spec>div{padding:7px 10px}
+  .bk-spec dt{font-size:8px}
+  .bk-spec dd{font-size:11px}
+  .bk p{font-size:11.5px;line-height:1.7}
+  .bk p:not(.fit){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .bk .fit{font-size:11px;margin-top:6px}
+  .bk .cta{grid-column:1/-1;margin-top:2px}
+  .bk .cta .btn{display:block;text-align:center;padding:12px 14px;font-size:12.5px}
+  .bk .cta small{font-size:9px;margin-top:5px}
+  .bk .cta .rev-link{display:block;text-align:center;margin-top:7px;font-size:11px}
+  table.cmp{font-size:11px;min-width:700px}
+  .cmp th,.cmp td{padding:8px 8px}
+  .os{padding:12px 12px}
+  .qt{font-size:13px}
+  .scta-mini,.scta-btn{font-size:11px;padding:12px 4px}
+  .totop{display:none}
+}
+</style>
 </body>
 </html>
