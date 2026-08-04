@@ -591,7 +591,7 @@ body{padding-bottom:150px}
   /* --- メニュータイル(ヒーロー直下・アプリの入口) --- */
   .m-hub{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--line)}
   .m-hub a{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px 11px;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--text);font-size:12px;font-weight:700;letter-spacing:.06em}
-  .m-hub small{font-size:7.5px;font-weight:900;letter-spacing:.3em;text-indent:.3em;color:var(--cyan);opacity:.85}
+  .m-hub small{font-size:9px;font-weight:700;letter-spacing:.2em;text-indent:.2em;color:var(--cyan);opacity:.85;font-family:var(--serif)}
   .okite-band{padding:10px 0}
   .okite-track{font-size:12px}
 
@@ -683,7 +683,7 @@ body{padding-bottom:150px}
   .sticky-cta{display:none}
   .m-tabbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:2px;background:rgba(5,7,13,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:7px 6px calc(7px + env(safe-area-inset-bottom))}
   .m-tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 7px;color:var(--sub);font-size:11.5px;font-weight:700;letter-spacing:.08em;border-radius:12px}
-  .m-tabbar small{font-size:7px;font-weight:900;letter-spacing:.26em;text-indent:.26em;color:var(--cyan);opacity:.7}
+  .m-tabbar small{font-size:8.5px;font-weight:700;letter-spacing:.14em;text-indent:.14em;color:var(--cyan);opacity:.7;font-family:var(--serif)}
   .m-tabbar a.primary{background:var(--grad);color:#05070d;font-weight:900}
   .m-tabbar a.primary small{color:#05070d;opacity:.75}
 }
@@ -724,7 +724,7 @@ body{padding-bottom:150px}
       <a class="nav-tower" href="../../media/en/index.html">The Tower</a>
       <a class="lang-sw room-link" href="#" hidden>My Page</a>
       <a class="lang-sw" href="../index.html" lang="ja" hreflang="ja">日本語</a>
-      <a class="nav-cta" href="../../lp/en/index.html">Become a Resident</a>
+      <a class="nav-cta" href="../../lp/en/index.html"><span class="cta-l">Become a Resident</span><span class="cta-s">Join</span></a>
     </nav>
     <a class="lang-sw-m room-link-m" href="../../room/">My Page</a>
     <a class="lang-sw-m" href="../index.html" lang="ja" hreflang="ja">日本語</a>
@@ -760,12 +760,12 @@ body{padding-bottom:150px}
 
 <!-- ===== Mobile menu tiles (<=600px only) ===== -->
 <nav class="m-hub" aria-label="City menu">
-  <a href="#story"><small>STORY</small>Story</a>
-  <a href="#okite"><small>RULES</small>The Code</a>
-  <a href="#residents"><small>RESIDENTS</small>Residents</a>
-  <a href="#facilities"><small>DISTRICTS</small>Districts</a>
-  <a href="#news"><small>BULLETIN</small>Bulletin</a>
-  <a href="#guide"><small>GUIDE</small>Guide</a>
+  <a href="#story"><small>物語</small>Story</a>
+  <a href="#okite"><small>掟</small>The Code</a>
+  <a href="#residents"><small>住人</small>Residents</a>
+  <a href="#facilities"><small>施設</small>Districts</a>
+  <a href="#news"><small>告知</small>Bulletin</a>
+  <a href="#guide"><small>歩</small>Guide</a>
 </nav>
 
 <!-- ===== OKITE MARQUEE ===== -->
@@ -1168,10 +1168,10 @@ body{padding-bottom:150px}
 
 <!-- ===== Mobile bottom tab bar (<=600px only) ===== -->
 <nav class="m-tabbar" aria-label="Mobile navigation">
-  <a href="#top"><small>TOP</small>Home</a>
-  <a href="../../media/en/index.html"><small>TOWER</small>Tower</a>
-  <a href="#kairan"><small>LETTER</small>Letter</a>
-  <a class="primary" href="../../lp/en/index.html"><small>JOIN</small>Join</a>
+  <a href="#top"><small>街</small>Home</a>
+  <a href="../../media/en/index.html"><small>塔</small>Tower</a>
+  <a href="#kairan"><small>便</small>Letter</a>
+  <a class="primary" href="../../lp/en/index.html"><small>移住</small>Join</a>
 </nav>
 
 <script>
@@ -1360,5 +1360,15 @@ document.querySelectorAll('.m-more').forEach(function(b){
   });
 });
 </script>
+<style>
+.nav-cta .cta-s{display:none}
+@media(max-width:600px){
+  .logo .sub{display:none}
+  .lang-sw,.lang-sw-m{padding:6px 10px;font-size:11px;white-space:nowrap}
+  .nav-cta{padding:8px 14px;font-size:12px;white-space:nowrap}
+  .nav-cta .cta-l{display:none}
+  .nav-cta .cta-s{display:inline}
+}
+</style>
 </body>
 </html>
