@@ -1186,7 +1186,7 @@ body{padding-bottom:150px}
     </details>
     <details>
       <summary>Can I leave (cancel) anytime?</summary>
-      <p>Stop renewal anytime from the Stripe billing page. Monthly with no lock-in: residency ends at the close of the paid month (no pro-rata refunds). Only OKU-SO requires a fresh review to re-enter.</p>
+      <p>Stop renewal anytime from &ldquo;Billing &amp; subscription&rdquo; in My Page (https://okugai.net/room/). Monthly with no lock-in: residency ends at the close of the paid month (no pro-rata refunds). Only OKU-SO requires a fresh review to re-enter.</p>
     </details>
   </div>
 </section>
@@ -1302,11 +1302,10 @@ body{padding-bottom:150px}
 </script>
 
 <script>
-/* ===== 決済接続(Stripe Checkout) =====
-   バックエンド(backend/server.js)をデプロイしたら、下のCHECKOUT_BASEに
-   そのURLを設定するだけで料金ボタンが決済に通電します。
-   例: var CHECKOUT_BASE="https://okugai-backend.example.com";
-   空のままなら従来どおり事前登録(#register)へスクロールします。 */
+/* ===== 事前登録フォーム送信 =====
+   ⚠旧「決済接続(Stripe Checkout)」の案内コメントは失効。Stripeは2026-07-28にアカウント閉鎖済みで復活不可。
+   決済導線はテレコムクレジットの入居ページ okugai.net/join/ に一本化済み。
+   このスクリプトは事前登録フォーム(#register)の送信処理のみを担当する。 */
 (function(){
   var f=document.getElementById('reg-form');
   if(!f)return;

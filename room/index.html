@@ -459,7 +459,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;font-size:11.5px;color:va
 <script>
 /* ===== 部屋の設定(開通時にここを埋める) =====
    SUPABASE_URL / SUPABASE_ANON_KEY: Supabaseプロジェクトの値(公開可のanonキー)
-   DISCORD_URL: 秘密基地の招待URL / STRIPE_PORTAL_URL: Stripeカスタマーポータル
+   DISCORD_URL: 秘密基地の招待URL / STRIPE_PORTAL_URL: 廃止(恒久空欄・埋めないこと)
    ---- Phase Aで作るテーブル(RLS: 本人のみselect) ----
    profiles(id uuid PK=auth.users.id, display_name text, plan text, banchi text, created_at timestamptz)
    points(id bigint PK, user_id uuid, deal_name text, pt int, status text[pending|approved|granted|denied], clicked_at timestamptz)
@@ -467,7 +467,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;font-size:11.5px;color:va
 var SUPABASE_URL="https://xtrtbgymwsexzadrjedg.supabase.co";
 var SUPABASE_ANON_KEY="sb_publishable_lwLNwaraj021o7lVt4IjDA_KC4hksEQ";
 var DISCORD_URL="https://discord.gg/B6h8F6nMH5";
-var STRIPE_PORTAL_URL="";/* Stripe閉鎖(2026-08-01)につき無効化。テレコム開通後は退会ページ(member.pl)導線に差し替え */
+var STRIPE_PORTAL_URL="";/* 恒久空欄＝旧ボタン非表示。解約導線はcancel-request一本化(2026-08-04決定)。member.plは会員番号+パスワード必須のため配線しないこと */
 /* 取引記録の運用者データ(あれば data/room-cockpit.json を自動表示。無ければ会員が端末内に取込) */
 /* 仮運用(Supabase開通まで): あいことばのPBKDF2(20万回反復・ソルト付)。開通後は自動でDiscordログインに切替
    ※静的サイトのクライアント側ゲートは簡易保護。本物の認証はDiscordログイン(Supabase)。機密データは置かない運用 */

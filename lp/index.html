@@ -1193,7 +1193,7 @@ body{padding-bottom:150px}
           <li class="on">経済ニュースの毎日配信</li>
         </ul>
         <a class="btn btn-primary js-checkout" data-plan="standard" id="open-cta" href="#register">入居受付は8/8 0時から</a>
-        <div class="pnotes"><div class="term">月々の契約・いつでも退去OK・また戻れる</div><div class="perday">先着枠の終了後は ¥9,800/月(1日あたり 約326円)</div></div>
+        <div class="pnotes"><div class="term">月々の契約・いつでも退去OK・また戻れる</div><div class="perday">9月以降の入居は ¥9,800/月(1日あたり 約326円)</div></div>
       </div>
       <div class="plan okuso">
         <div class="plan-head">
@@ -1266,7 +1266,7 @@ body{padding-bottom:150px}
     </div>
     <details>
       <summary>「先行リリース中は移住費¥0」は本当ですか？</summary>
-      <p>本当です。クレジットカードの登録も不要——LINEで登録して、基地の入居ボタンを押すだけです。初期住民の¥0はその後もずっと変わりません。枠が埋まったあとに入居する場合のみ ¥9,800/月 がかかります。</p>
+      <p>本当です。8月中に入居された方は、2026年9月末まで移住費¥0です(入居はカード登録制。期間中の課金はありません・課金開始は10/1)。9月以降に入居される場合は月額¥9,800です。月々の契約で、いつでも退去できます。</p>
     </details>
     <details class="faq-q">
       <summary>活動はどこで行われますか？Discordを使ったことがないのですが</summary>
@@ -1415,11 +1415,10 @@ body{padding-bottom:150px}
 </script>
 
 <script>
-/* ===== 決済接続(Stripe Checkout) =====
-   Stripe Payment LinkのURLを下のPAYMENT_LINKSに入れると決済ボタンが通電します。旧: バックエンド方式のCHECKOUT_BASEは廃止。
-   そのURLを設定するだけで料金ボタンが決済に通電します。
-   例: var CHECKOUT_BASE="https://okugai-backend.example.com";
-   空のままなら従来どおり事前登録(#register)へスクロールします。 */
+/* ===== 事前登録フォーム送信 =====
+   ⚠旧「決済接続(Stripe Checkout)」の案内コメントは失効。Stripeは2026-07-28にアカウント閉鎖済みで復活不可。
+   決済導線はテレコムクレジットの入居ページ okugai.net/join/ に一本化済み(PAYMENT_LINKSにURLを入れないこと)。
+   このスクリプトは事前登録フォーム(#register)の送信処理のみを担当する。 */
 (function(){
   var f=document.getElementById('reg-form');
   if(!f)return;
