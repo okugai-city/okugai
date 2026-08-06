@@ -49,6 +49,7 @@ h1{font-family:var(--serif);font-size:clamp(26px,5vw,38px);font-weight:800;lette
 .sys-tabs button{font-family:var(--sans);font-size:12.5px;font-weight:900;color:var(--sub);background:transparent;border:1px solid var(--line2);border-radius:999px;padding:9px 20px;cursor:pointer;transition:all .2s}
 .sys-tabs button.on{background:var(--grad-gold);color:#05070d;border-color:transparent}
 .sys-tabs button:not(.on):hover{color:var(--text);border-color:rgba(232,185,92,.5)}
+.sys-tabs button small{font-size:8px;font-weight:900;letter-spacing:.14em;color:var(--gold);margin-left:7px;vertical-align:1px}
 /* ダッシュボード */
 .dash{margin-top:26px}
 .sys-head{display:flex;flex-direction:column;gap:10px;border:1px solid rgba(232,185,92,.4);border-radius:16px;padding:18px 24px;background:linear-gradient(120deg,rgba(232,185,92,.07),rgba(15,22,38,.7))}
@@ -243,13 +244,23 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
     tabs.hidden=false;
     systems.forEach(function(s,i){
       var b=document.createElement('button');b.textContent=s.name;b.dataset.id=s.id;if(i===0)b.classList.add('on');
+      if(s.soon){var sm=document.createElement('small');sm.textContent='COMING SOON';b.appendChild(sm)}
       b.addEventListener('click',function(){tabs.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});load(s)});
       tabs.appendChild(b);
     });
     load(systems[0]);
   }).catch(function(){empty.hidden=false});
 
+  var ekEl=empty.querySelector('.ek'),epEl=empty.querySelector('p');
+  var EK0=ekEl.textContent,EP0=epEl.textContent;
   function load(sys){
+    if(sys.soon){
+      dash.hidden=true;
+      ekEl.textContent='COMING SOON——このシステムは準備中。';
+      epEl.textContent='調整と検証が終わり次第、走行を開始します。走り始めた日から、記録はすべてこの台帳に刻まれます。';
+      empty.hidden=false;return;
+    }
+    ekEl.textContent=EK0;epEl.textContent=EP0;
     fetch('../data/systems/'+encodeURIComponent(sys.id)+'.json?v='+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(d){
       if(!d||!d.trades||!d.trades.length){dash.hidden=true;empty.hidden=false;return}
       empty.hidden=true;dash.hidden=false;render(sys,d);

@@ -22,13 +22,15 @@
    "id": "mc-swing-00",
    "name": "システム4",
    "tag": "多通貨スイング型(26ペア・0.01ロット固定) ・ 高勝率×損大利小(広SL) ・ 長期安定の検証型",
-   "broker": "XMTrading"
+   "broker": "XMTrading",
+   "soon": true
   },
   {
    "id": "mc-swing-03",
    "name": "システム5",
    "tag": "多通貨スイング型(15ペア) ・ 小ロット積み上げ×広SL ・ 少額資金の効率運用型",
-   "broker": "EMC Trading"
+   "broker": "EMC Trading",
+   "soon": true
   }
  ]
 }
