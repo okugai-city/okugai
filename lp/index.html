@@ -160,6 +160,7 @@ h2{font-family:var(--serif);font-size:clamp(25px,3.8vw,37px);font-weight:700;lin
 .ledger-stamp{font-family:var(--sans);font-size:13px;font-weight:900;letter-spacing:.18em;color:var(--gold);border:1px solid rgba(232,185,92,.5);border-radius:999px;padding:9px 20px;white-space:nowrap}
 @media(max-width:640px){.ledger-head{flex-direction:column;align-items:flex-start;gap:12px}.ledger-stamp{font-size:11px;padding:7px 14px;letter-spacing:.12em}}
 .ledger-rows{padding:6px 26px}
+.ledger-row.sys-soon{opacity:.6}
 .ledger-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.3fr;gap:12px;padding:16px 0;border-bottom:1px dashed rgba(90,107,146,.35);font-size:12px;color:#5b6a8c;letter-spacing:.08em;font-family:var(--sans)}
 .ledger-row:last-child{border-bottom:none}
 .ledger-row.sys{grid-template-columns:.65fr 1.55fr .7fr 150px 1.05fr .8fr;color:#c3cde4;align-items:center;transition:background .25s}
@@ -1484,7 +1485,8 @@ body{padding-bottom:150px}
     return Promise.all(systems.map(function(s){
       return fetch('../data/systems/'+encodeURIComponent(s.id)+'.json?v='+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(d){return {s:s,d:d}});
     })).then(function(list){
-      list=list.filter(function(x){return x.d&&x.d.trades&&x.d.trades.length});
+      var soonList=list.filter(function(x){return x.s.soon}).map(function(x){return x.s});
+      list=list.filter(function(x){return !x.s.soon&&x.d&&x.d.trades&&x.d.trades.length});
       if(!list.length)return;
       var rows=document.querySelector('.ledger-rows');
       var empty=document.querySelector('.ledger-empty');
@@ -1524,6 +1526,17 @@ body{padding-bottom:150px}
           +'<span class="sk">'+spark(x.d.trades,idx)+'</span>'
           +'<span class="sv '+(total>=0?'pos':'neg')+'" data-total="'+total+'">'+yen(total)+'</span>'
           +'<span class="sw" data-wr="'+wr.toFixed(1)+'">勝率'+wr.toFixed(1)+'%</span>'
+          +'</div>';
+      }).join('');
+      rows.innerHTML+=soonList.map(function(sy){
+        var feat=(sy.tag||'').split(' ・ ')[0];
+        return '<div class="ledger-row sys sys-soon">'
+          +'<span class="sn">'+sy.name+(sy.broker?'<em class="bk">'+sy.broker+'</em>':'')+'</span>'
+          +'<span class="sf">'+feat+'</span>'
+          +'<span class="sd">準備中</span>'
+          +'<span class="sk"></span>'
+          +'<span class="sv" style="color:var(--gold2);font-size:13px;letter-spacing:.12em">COMING SOON</span>'
+          +'<span class="sw"></span>'
           +'</div>';
       }).join('');
       if(empty){empty.className='ledger-empty ledger-cta';empty.innerHTML='<a href="../hp/systems.html">システム別の走行記録ダッシュボードを見る →</a>'}
