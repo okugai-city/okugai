@@ -25,3 +25,9 @@ assets/residents/_original_backup/
 
 # 審査提出用の社内文書(苦情処理マニュアル等)。公開しない
 docs/
+
+# 作業用スクラッチ(削除済みDiscord投稿のバックアップ・コード.bak等の社内物)。公開しない
+scratchpad/
+
+# 内部運用文書(Claude用)。公開リポジトリに出さない
+CLAUDE.md

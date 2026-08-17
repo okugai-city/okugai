@@ -259,6 +259,13 @@ body{padding-bottom:150px}
 {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"EAを買えば自動で稼げますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。EAは「あなたの代わりにルールを自動で実行する道具」であって、利益を保証する箱ではありません。中身のルールに優位性がなければ、自動で負けるだけです。だから重要なのは「どのEAを買うか」ではなく「そのルールを、動かす前に自分で確かめたか」です。"}},{"@type":"Question","name":"儲かるEAはどう見分けますか？","acceptedAnswer":{"@type":"Answer","text":"宣伝文句や右肩上がりの実績画像では見分けられません。見るべきは3つの数字——最大ドローダウン(最悪期にどこまで沈んだか)、プロフィットファクター、そして検証期間に上げ・下げ・レンジの相場が含まれているか。この3つを開示できないEAは、優位性を証明していないのと同じです。"}},{"@type":"Question","name":"バックテストで好成績でも実運用で負けるのはなぜですか？","acceptedAnswer":{"@type":"Answer","text":"過去データに合わせ込みすぎた(カーブフィッティング)場合と、スプレッド・スリッページなど実際のコストを検証に含めていない場合が典型です。だからバックテストの後に必ずフォワードテスト(未来のデータで検証)と少額の実弾運用を挟み、想定と現実のズレを確認してから本番に上げます。"}},{"@type":"Question","name":"自動売買はどの口座・環境で動かせばいいですか？","acceptedAnswer":{"@type":"Answer","text":"EAはMT4/MT5というプラットフォームで動きます。国内ではFXTFなど一部、海外FXはほぼ全社が対応。24時間止めずに動かすにはVPS(データセンターにある止まらないPC)を借りるのが基本です。スプレッドと約定品質が成績に直結するため、口座選びは検証と同じくらい重要です。"}}]}
 ]}
 </script>
+<!-- Meta Pixel (okugai) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1405610168126230');fbq('track','PageView');
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="lin.ee"]');if(a&&typeof fbq==='function')fbq('track','Lead');});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1405610168126230&ev=PageView&noscript=1"/></noscript>
 </head>
 <body id="top">
 <div class="progress" aria-hidden="true"></div>
@@ -496,6 +503,27 @@ body{padding-bottom:150px}
 </div>
 
 <a class="totop" href="#top" aria-label="ページの先頭へ戻る"><svg viewBox="0 0 24 24"><path d="m6.5 14.5 5.5-5.5 5.5 5.5"/></svg></a>
+<style>
+/* 街への導線（2026-08-09追加）。既存 .kmini を写経し、余白・角丸・文字サイズ階段は同一。色のみブランドの金(--gold)へ */
+.kjoin{border:1px solid rgba(232,185,92,.35);border-radius:18px;background:radial-gradient(120% 160% at 85% -20%,rgba(232,185,92,.08),transparent 55%),var(--panel,#0f1626);padding:28px 30px;margin:44px 0}
+.kjoin .kjt{border:none!important;padding:0!important;margin:0 0 8px!important;font-family:var(--serif,serif);font-size:19px;font-weight:800;color:var(--text,#e9edf6)}
+.kjoin p.kjlead{font-size:12.5px;color:var(--sub,#93a2c4);margin:0 0 18px}
+.kjoin .kjrow{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+.kjoin .kjbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:900;font-size:13px;background:linear-gradient(135deg,#f0cd82,#e8b95c);color:#05070d;text-decoration:none;white-space:nowrap}
+.kjoin .kjbtn2{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border:1px solid var(--line2,#2e4064);background:var(--panel2,#151e33);color:var(--text,#e9edf6);border-radius:999px;font-weight:900;font-size:12.5px;text-decoration:none;white-space:nowrap}
+.kjoin .kjbtn2:hover{border-color:#41d8ff;color:#41d8ff}
+.kjoin .kjnote{font-size:10.5px;color:var(--sub,#93a2c4);margin:10px 0 0}
+@media(max-width:560px){.kjoin{padding:22px 18px}.kjoin .kjbtn,.kjoin .kjbtn2{width:100%}}
+</style>
+<div class="kjoin">
+  <div class="kjt">億街サロン——検証で語るFXの街</div>
+  <p class="kjlead">予想は売りません。勝ちも負けも走行記録として公開する、会員制の街です。街の中は無料で見学できます。</p>
+  <div class="kjrow">
+    <a class="kjbtn" href="https://discord.gg/B6h8F6nMH5" target="_blank" rel="noopener">街を見学する（無料）</a>
+    <a class="kjbtn2" href="../join/">入居案内を見る</a>
+  </div>
+  <p class="kjnote">※ 完全開街 2026.8.17。売買の指示・推奨および成果の保証は行いません。</p>
+</div>
 <footer>
   <div class="container">
     <div class="footgrid">

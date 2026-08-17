@@ -35,6 +35,13 @@ table{font-variant-numeric:tabular-nums}
 :focus-visible{outline:2px solid #41d8ff;outline-offset:3px;border-radius:4px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
+<!-- Meta Pixel (okugai) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1405610168126230');fbq('track','PageView');
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="lin.ee"]');if(a&&typeof fbq==='function')fbq('track','Lead');});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1405610168126230&ev=PageView&noscript=1"/></noscript>
 </head>
 <body id="top">
 <div class="container">
@@ -78,7 +85,7 @@ table{font-variant-numeric:tabular-nums}
   <h2>第5条(退会・解約)</h2>
   <ol>
     <li>本サービスは月単位の契約とし、更新停止の手続きがない場合は毎月自動更新されます。億荘プランは定員制のため、退去後の再入居には改めて審査および空室状況の確認を要します。</li>
-    <li>会員は、決済プラットフォームのカスタマーポータルからいつでも更新停止(解約予約)ができます。期間途中の解約・日割り返金はできません。</li>
+    <li>会員は、マイページ(https://okugai.net/room/)の「契約・お支払いの管理」からいつでも更新停止(解約予約)ができます。期間途中の解約・日割り返金はできません。</li>
     <li>解約後は次回請求が発生せず、支払済み期間の末日まで本サービスを利用できます。</li>
   </ol>
 

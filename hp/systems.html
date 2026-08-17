@@ -128,6 +128,13 @@ footer{border-top:1px solid var(--line);padding:26px 0;font-size:11.5px;color:va
   .sec-head{margin-bottom:18px}
 }
 </style>
+<!-- Meta Pixel (okugai) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1405610168126230');fbq('track','PageView');
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="lin.ee"]');if(a&&typeof fbq==='function')fbq('track','Lead');});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1405610168126230&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
 <header>

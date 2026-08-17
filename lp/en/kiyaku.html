@@ -35,6 +35,13 @@ table{font-variant-numeric:tabular-nums}
 :focus-visible{outline:2px solid #41d8ff;outline-offset:3px;border-radius:4px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
+<!-- Meta Pixel (okugai) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1405610168126230');fbq('track','PageView');
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="lin.ee"]');if(a&&typeof fbq==='function')fbq('track','Lead');});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1405610168126230&ev=PageView&noscript=1"/></noscript>
 </head>
 <body id="top">
 <div class="container">
@@ -79,7 +86,7 @@ table{font-variant-numeric:tabular-nums}
   <h2>Article 5 (Withdrawal and cancellation)</h2>
   <ol>
     <li>The service is a monthly contract that renews automatically each month unless renewal is stopped. As OKU-SO is capacity-limited, re-entry after leaving requires a fresh review and an available room.</li>
-    <li>Members may stop renewal at any time from the payment platform's customer portal. Mid-term cancellation and pro-rata refunds are not available.</li>
+    <li>Members may stop renewal at any time from &ldquo;Billing &amp; subscription&rdquo; in My Page (https://okugai.net/room/). Mid-term cancellation and pro-rata refunds are not available.</li>
     <li>After stopping renewal, no further charges arise and the Service remains available until the last day of the paid term.</li>
   </ol>
 

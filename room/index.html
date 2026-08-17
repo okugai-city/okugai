@@ -165,6 +165,28 @@ h1{font-family:var(--serif);font-size:clamp(25px,5vw,36px);font-weight:800;lette
 .goal-io input{margin-top:auto;font-family:var(--sans);font-size:14px;padding:11px 14px;border-radius:12px;border:1px solid var(--line2);background:rgba(5,7,13,.55);color:var(--text)}
 .goal-io input:focus{outline:none;border-color:rgba(232,185,92,.6)}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+/* システム紐付け */
+.sl-io{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.sl-io{grid-template-columns:1fr}}
+.sl-io label{font-size:10.5px;font-weight:900;letter-spacing:.08em;color:var(--sub);display:flex;flex-direction:column;gap:6px}
+.sl-io label small{font-weight:400;letter-spacing:0;font-size:10px}
+.sl-io input,.sl-io select{margin-top:auto;font-family:var(--sans);font-size:14px;padding:11px 14px;border-radius:12px;border:1px solid var(--line2);background:rgba(5,7,13,.55);color:var(--text)}
+.sl-io input:focus,.sl-io select:focus{outline:none;border-color:rgba(232,185,92,.6)}
+.sl-state{display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:900;letter-spacing:.06em;border:1px solid var(--line2);border-radius:12px;padding:11px 14px;margin-bottom:14px;background:rgba(5,7,13,.45)}
+.sl-state i{width:7px;height:7px;border-radius:50%;background:var(--sub);flex:0 0 auto}
+.sl-state.on{border-color:rgba(89,242,162,.45)}
+.sl-state.on i{background:var(--lime);box-shadow:0 0 8px rgba(89,242,162,.75)}
+.sl-state.on b{color:var(--lime)}
+.sl-state .sd{margin-left:auto;font-weight:400;font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.sl-check{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:12.5px;color:var(--text);cursor:pointer}
+.sl-check input{width:16px;height:16px;accent-color:#e8b95c;cursor:pointer}
+.sl-act{display:flex;align-items:center;gap:14px;margin-top:16px;flex-wrap:wrap}
+.sl-act button{font-family:var(--sans);font-size:12.5px;font-weight:900;letter-spacing:.06em;background:var(--grad-gold);color:#05070d;border:none;border-radius:12px;padding:12px 26px;cursor:pointer;transition:transform .2s}
+.sl-act button:hover{transform:translateY(-1px)}
+.sl-act button:disabled{opacity:.5;cursor:default;transform:none}
+.sl-msg{font-size:12px;font-weight:700;color:var(--sub)}
+.sl-msg.ok{color:var(--lime)}
+.sl-msg.ng{color:var(--red)}
 input[type=number]{-moz-appearance:textfield;appearance:textfield}
 .goal-top label em{font-style:normal;font-family:var(--sans);font-weight:900;font-size:12px;color:var(--text);margin-left:auto}
 .goal-top label .lrow2{display:flex;align-items:baseline;gap:8px}
@@ -207,6 +229,13 @@ footer{border-top:1px solid var(--line);padding:24px 0;font-size:11.5px;color:va
   .nav-r a{white-space:nowrap;padding:8px 2px}
 }
 </style>
+<!-- Meta Pixel (okugai) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1405610168126230');fbq('track','PageView');
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="lin.ee"]');if(a&&typeof fbq==='function')fbq('track','Lead');});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1405610168126230&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
 <header>
@@ -276,6 +305,27 @@ footer{border-top:1px solid var(--line);padding:24px 0;font-size:11.5px;color:va
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="card" data-rtab="home" id="syslink-card" hidden>
+        <div class="ct">SYSTEM LINK — システム紐付け</div>
+        <p class="none-note" style="padding-top:0">システムのご利用には、お客様のFX口座との紐付けが必要です。口座を開設したら、こちらに登録してください。運営が確認しだい、利用開始のご案内をお送りします。</p>
+        <div class="sl-state" id="sl-state"><i></i><b>—</b></div>
+        <div class="sl-io">
+          <label>ブローカー
+            <select id="sl-broker">
+              <option value="">選択してください</option>
+              <option value="emc">EMC（コピートレード対応）</option>
+              <option value="xm">XMTrading</option>
+              <option value="hfm">HFM</option>
+              <option value="mint">MINT</option>
+            </select>
+          </label>
+          <label>口座番号<small>(MT4／MT5のログイン番号)</small><input type="text" id="sl-account" placeholder="1234567" inputmode="numeric" autocomplete="off" maxlength="12"></label>
+        </div>
+        <label class="sl-check"><input type="checkbox" id="sl-copy"><span>EMCのコピートレード フォロワー登録も完了した</span></label>
+        <div class="sl-act"><button type="button" id="sl-save">登録する</button><span class="sl-msg" id="sl-msg"></span></div>
+        <p class="none-note" style="font-size:10.5px">※ 口座のパスワードは入力しないでください。運営がパスワードをお尋ねすることは一切ありません。紐付けは口座番号のみで完了します。</p>
       </div>
 
       <div class="card" data-rtab="home">
@@ -1000,6 +1050,41 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
     });
   }
 
+  /* システム紐付け: 住人が自分で口座情報を登録する(RLS「own profile write」で自分の行のみ更新)。
+     カード登録済みプラン(kichi/okuso)にだけ表示する。運営の手入力を無くすのが目的。 */
+  function initSysLink(sb,user,p){
+    var card=document.getElementById('syslink-card');if(!card)return;card.hidden=false;
+    var bk=document.getElementById('sl-broker'),ac=document.getElementById('sl-account'),cp=document.getElementById('sl-copy');
+    var msg=document.getElementById('sl-msg'),btn=document.getElementById('sl-save'),st=document.getElementById('sl-state');
+    var cur=p||{};
+    function paint(row){
+      var linked=!!(row.broker&&row.broker_account);
+      st.className='sl-state'+(linked?' on':'');
+      st.innerHTML='<i></i><b>'+(linked?'紐付け済み':'未登録')+'</b><span class="sd">'+
+        (linked?esc(String(row.broker).toUpperCase())+' / '+esc(row.broker_account)+(row.copy_linked_at?' / COPY':''):'口座を登録してください')+'</span>';
+      if(row.broker)bk.value=row.broker;
+      if(row.broker_account)ac.value=row.broker_account;
+      cp.checked=!!row.copy_linked_at;
+    }
+    paint(cur);
+    btn.addEventListener('click',function(){
+      var b=bk.value,a=ac.value.trim();
+      msg.className='sl-msg';
+      if(!b){msg.className='sl-msg ng';msg.textContent='ブローカーを選んでください';return}
+      if(!/^[0-9]{4,12}$/.test(a)){msg.className='sl-msg ng';msg.textContent='口座番号は数字4〜12桁で入力してください';return}
+      btn.disabled=true;msg.textContent='送信中…';
+      var now=new Date().toISOString();
+      var patch={broker:b,broker_account:a,broker_linked_at:cur.broker_linked_at||now,
+                 copy_linked_at:cp.checked?(cur.copy_linked_at||now):null};
+      sb.from('profiles').update(patch).eq('id',user.id).select().maybeSingle().then(function(r){
+        btn.disabled=false;
+        if(r.error){msg.className='sl-msg ng';msg.textContent='登録に失敗しました。時間をおいて再度お試しください。';return}
+        cur=r.data||patch;paint(cur);
+        msg.className='sl-msg ok';msg.textContent='登録しました。運営が確認しだいご連絡します。';
+      });
+    });
+  }
+
   function enter(sb,user){
     room.hidden=false;document.getElementById('logout').hidden=false;initTabs();initGoal();initShare();initCockpit();
     var meta=user.user_metadata||{};
@@ -1031,6 +1116,7 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
           });
         };
         document.getElementById('doors-note').hidden=true;
+        initSysLink(sb,user,p);
       }
       if(_persona.isOp){personaRender();}
       else{document.getElementById('id-plan').textContent=_persona.chips.plan;document.getElementById('id-banchi').textContent=_persona.chips.banchi;document.getElementById('id-since').textContent=_persona.chips.since;}
