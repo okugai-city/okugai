@@ -53,6 +53,20 @@ h1{font-family:var(--serif);font-size:30px;font-weight:800;letter-spacing:.04em;
 .foot a{color:var(--sub)}
 .en{margin-top:26px;border-top:1px dashed var(--line);padding-top:18px;font-size:12px;color:var(--sub)}
 
+/* ===== 見学/入居の比較(2026-08-17追加) 装飾は文字組のみ・アイコンと絵文字は使わない ===== */
+.cmp{display:grid;gap:14px;margin-top:2px}
+.cmp-col{border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px}
+.cmp-col.is-key{border-color:rgba(232,185,92,.38);background:rgba(232,185,92,.03)}
+.cmp-h{display:flex;flex-direction:column;gap:3px;font-family:var(--serif);font-size:15px;font-weight:800;margin-bottom:12px}
+.cmp-h small{font-size:8px;font-weight:900;letter-spacing:.3em;text-indent:.3em;color:var(--cyan)}
+.cmp-col.is-key .cmp-h small{color:var(--gold2)}
+.cmp ul{list-style:none;display:grid;gap:7px}
+.cmp li{font-size:12.5px;color:var(--sub);padding-left:14px;position:relative;line-height:1.75}
+.cmp li::before{content:"";position:absolute;left:0;top:.78em;width:6px;height:1px;background:var(--line2)}
+.cmp li b{color:var(--text);font-weight:700}
+.cmp-lead{font-size:12px;color:var(--sub);margin-bottom:10px}
+.cmp-x{margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--sub)}
+
 /* ===== 共通モバイル・タイポスケール(2026-08-04・600px以下) PC:SP = h1 40:26 / h2 28:20 / h3 18:16 ===== */
 @media(max-width:600px){
   section{padding-top:30px;padding-bottom:30px}
@@ -60,6 +74,20 @@ h1{font-family:var(--serif);font-size:30px;font-weight:800;letter-spacing:.04em;
   h2{font-size:20px}
   h3{font-size:16px}
   .sec-head{margin-bottom:18px}
+}
+
+/* ============================================================
+   モバイル専用設計(600px以下) — 比較ブロックは縮小せず別の詰め方にする
+   1カラム積みのまま余白と行間を詰め、読む量を減らさずに全高を抑える
+   ============================================================ */
+@media(max-width:600px){
+  .card{padding:24px 18px}
+  .card h2{font-size:15px}
+  .cmp-col{padding:16px 15px 14px}
+  .cmp-h{font-size:14px}
+  .cmp-h small{font-size:7.5px}
+  .cmp li{font-size:12px;line-height:1.7}
+  .cmp-lead,.cmp-x{font-size:11px}
 }
 </style>
 </head>
@@ -118,7 +146,38 @@ h1{font-family:var(--serif);font-size:30px;font-weight:800;letter-spacing:.04em;
 
   <div class="card" id="step-loading"><p><span class="spin"></span>　確認しています…</p></div>
 
-  <div class="en"><b>English:</b> Enrollment is card-registration based (join in August: ¥0 until Sep 30, 2026 / from September: ¥9,800/mo). Sign in with Discord above, join the server if prompted, then follow your personal card-registration link. Your resident role is granted automatically after registration.</div>
+  <div class="card" id="compare">
+    <h2>見学と入居で、できることの違い</h2>
+    <div class="cmp">
+      <div class="cmp-col">
+        <div class="cmp-h"><small>FREE</small>見学（無料・いつまでも）</div>
+        <ul>
+          <li>広場で住人と話す、質問する（来街のあいさつもここ）</li>
+          <li>回覧板の街のお知らせと、毎朝6時の相場3行まとめ</li>
+          <li>実績館の走行記録——良い月も悪い月も、加工なしの記録として</li>
+          <li>移住届で、入居した住人の記帳を読む</li>
+          <li>サイトの記事・入居ガイドをすべて読む</li>
+        </ul>
+        <p class="cmp-x">見学のままでは、下の4部屋には入れません。移住届への記帳もできません（読むのは自由です）。</p>
+      </div>
+      <div class="cmp-col is-key">
+        <div class="cmp-h"><small>RESIDENT</small>入居（住人・月額¥9,800）</div>
+        <p class="cmp-lead">見学でできることは全部そのまま。そのうえで——</p>
+        <ul>
+          <li><b>リアルタイムトレード</b>／住人の取引をそのまま公開している部屋。編集なしで観戦して学べます</li>
+          <li><b>経済ニュース</b>／毎朝6時、相場レポートの全文と「今日はここを見る」</li>
+          <li><b>相場考察now</b>／相場の考察が、その場で流れてくる部屋</li>
+          <li><b>工房</b>／検証ツールの配布とサポート、口座開設と口座番号登録の窓口、マニュアル一式</li>
+          <li><b>移住届に記帳できます</b>／回覧板で「○人目の住人」として街に紹介されます</li>
+        </ul>
+        <p class="cmp-x">この4部屋は、見学の方のチャンネル一覧には表示されません。入居すると現れます。</p>
+      </div>
+    </div>
+    <p class="note">月単位・<b>縛りなし</b>。解約はマイページからいつでも申請でき、当月末までご利用いただけます。<br>億街は教育・コミュニティサービスです。売買の指示や推奨、成果の保証は行いません。</p>
+  </div>
+
+  <div class="en"><b>English:</b> Enrollment is card-registration based (join in August: ¥0 until Sep 30, 2026 / from September: ¥9,800/mo). Sign in with Discord above, join the server if prompted, then follow your personal card-registration link. Your resident role is granted automatically after registration.<br><br>
+  <b>Free vs resident:</b> Visitors can use the plaza, the bulletin board with the daily three-line market brief, the records room, and can read the residents' register. Residents additionally get four rooms — watching residents' live trades, the full morning report, market notes, and the workshop (tools, broker setup, manuals) — and can sign the residents' register. Monthly, no lock-in; you can request cancellation from your member page at any time.</div>
 
   <p class="foot">億街は教育・コミュニティサービスです。売買の指示や成果の保証は行いません。<br>
   <a href="https://okugai.net/lp/tokushoho.html">特定商取引法に基づく表記</a> ／ <a href="https://okugai.net/lp/">移住案内(LP)へ戻る</a></p>
