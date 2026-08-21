@@ -183,7 +183,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <p class="note">月単位・<b>縛りなし</b>。解約はマイページからいつでも申請でき、当月末までご利用いただけます。<br>億街は教育・コミュニティサービスです。売買の指示や推奨、成果の保証は行いません。</p>
   </div>
 
-  <div class="en"><b>English:</b> Enrollment is card-registration based (join by Sep 30: ¥0 until Oct 1, 2026 / from September: ¥9,800/mo). Sign in with Discord above, join the server if prompted, then follow your personal card-registration link. Your resident role is granted automatically after registration.<br><br>
+  <div class="en"><b>English:</b> Enrollment is card-registration based (join by Sep 30: ¥0 until Oct 1, 2026 / from October: ¥9,800/mo). Sign in with Discord above, join the server if prompted, then follow your personal card-registration link. Your resident role is granted automatically after registration.<br><br>
   <b>Free vs resident:</b> Visitors can use the plaza, the bulletin board with the daily three-line market brief, the records room, and can read the residents' register. Residents additionally get four rooms — our trades with the reasoning behind them, the full morning report, market notes, and the workshop, which hands out the very indicators used in those trades so you can reproduce the same screen — and can sign the residents' register. Monthly, no lock-in; you can request cancellation from your member page at any time.</div>
 
   <p class="foot">億街は教育・コミュニティサービスです。売買の指示や成果の保証は行いません。<br>
@@ -202,8 +202,8 @@ var TELECOM={
   //   テレコム回答(2026-08-17 米倉氏)で、courseAugを9月に流用すると10/1がスキップされ
   //   初回課金が11/1になることが確定した(9/15申込→11/01が1回目)。9月は専用コースが要る。
   //   作成手順: 集計システム『継続決済コース設定』で 月特定日指定/指定日=1日/9800円/1ヶ月/1回目課金=あり
-  //   → 発番されたコースIDをここに入れるだけで有効になる。空の間はcourseAugにフォールバック(=現行と同じ挙動)。
-  courseSep:"",
+  //   → 発番されたコースIDをここに入れて有効化済み。万一空にすると9月は「接続中」表示で止まる(courseAug流用は課金ずれのため禁止)。
+  courseSep:"1month9800en_2",   // 9月入居: 月特定日1日・継続決済1回目課金"あり"(10/1から9,800円)。テレコム発番2026-08-18 12:12(米倉氏・カード認証adult/order.plからの開始可を明言)
   courseOct:"1month9800en"       // 10月以降の入居用: 申込日起点特定日・1回目課金あり(テレコム回答2026-07-31 15:13で方式確定・二重課金なし)
 };
 var OPEN_AT=Date.parse("2026-08-16T15:00:00Z"); // 8/17 0:00 JST
@@ -219,9 +219,10 @@ function monthCourse(){
   // 月によってコース切替(JST)。コース未設定の月はnull(=接続中表示)
   var d=jstNow(),ym=d.getUTCFullYear()*100+(d.getUTCMonth()+1);
   if(ym<=202608) return TELECOM.courseAug?{kind:"auth",course:TELECOM.courseAug}:null; /* 8月入居=1回目課金なし(9/1スキップ→10/1課金) */
-  /* 9月入居=1回目課金"あり"の専用コース(→10/1課金)。未発番の間はcourseAugにフォールバックする。
-     フォールバック中は初回課金が11/1になる(テレコム回答2026-08-17)ので、9月入居が出る前に必ずcourseSepを設定すること。 */
-  if(ym===202609){ var c9=TELECOM.courseSep||TELECOM.courseAug; return c9?{kind:"auth",course:c9}:null; }
+  /* 9月入居=1回目課金"あり"の専用コース(→10/1課金)。courseAugへのフォールバックは置かない:
+     courseAugだと10/1がスキップされ初回課金が11/1にずれる(テレコム回答2026-08-17)ため、
+     courseSepが万一空になったら課金ミスではなく「接続中」表示で止まるのが正。 */
+  if(ym===202609) return TELECOM.courseSep?{kind:"auth",course:TELECOM.courseSep}:null;
   return TELECOM.courseOct?{kind:"pay",course:TELECOM.courseOct}:null;
 }
 function payLink(memberNo){
