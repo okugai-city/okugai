@@ -104,13 +104,13 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 <body>
 <div class="wrap">
   <div class="brand"><span class="kanji">億街</span><small>OKUGAI — 入居受付</small></div>
-  <div class="badge">電脳億街 移住案内所<b id="open-state">2026.8.17 完全開街</b></div>
+  <div class="badge">電脳億街 移住案内所<b id="open-state">体験入居 受付中</b></div>
   <h1>秘密基地に、入居する。</h1>
   <p class="lead"><b style="color:var(--gold2)">2026年12月31日まで、カード登録なしの「体験入居」を受け付けています。</b>住人限定の部屋も、システムも、すべて無料でお使いいただけます。2027年1月1日からは月額¥9,800の有料会員となり、カードのご登録がない場合はご利用いただけなくなります（12月に改めてご案内します）。</p>
 
   <!-- 8/4前 -->
   <div class="card hidden" id="pre-open">
-    <h2>完全開街は 8月17日</h2>
+    <h2>体験入居を受付中です</h2>
     <p>体験入居の受付中です。<b style="color:var(--gold2)">2026年12月31日まで、カード登録なしで無料</b>でお使いいただけます。</p>
     <a class="btn btn-ghost" href="https://discord.gg/B6h8F6nMH5" target="_blank" rel="noopener">Discordの見学席へ(無料)</a>
   </div>
@@ -150,10 +150,10 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <h2><span class="n">3</span>カードを登録して入居</h2>
     <div class="me"><span class="tag">鍵の渡し先</span><b id="me-name">—</b></div>
     <p style="margin-top:14px" id="pay-desc">下のボタンから決済ページ（テレコムクレジット）でカードを登録すると、数分以内に住人ロールが自動で付与されます。</p>
-    <p class="price" id="pay-price">9月末までの入居 → 9月末まで課金¥0</p>
+    <p class="price" id="pay-price">月額 ¥9,800（税込・月単位・縛りなし）</p>
     <a class="btn btn-gold" id="btn-pay" href="#" target="_blank" rel="noopener">カードを登録して入居する</a>
     <div class="warn">※ このリンクは<b>あなた専用</b>です（Discord IDと紐づいています）。他の人に共有しないでください。共有されたリンクで登録しても、鍵は元の本人にしか渡りません。</div>
-    <p class="note">対象は<b>秘密基地</b>プラン（¥9,800/月・9月末までの入居の課金開始は10/1）。億荘（¥49,800/月）は審査制で<b>募集開始は2027年1月予定</b>——<a href="https://okugai.net/lp/#register">入居希望の事前登録</a>をいただいた方に個別でご案内します。</p>
+    <p class="note">対象は<b>秘密基地</b>プラン（¥9,800/月）。億荘（¥49,800/月）は審査制で<b>募集開始は2027年1月予定</b>——<a href="https://okugai.net/lp/#register">入居希望の事前登録</a>をいただいた方に個別でご案内します。</p>
   </div>
 
   <!-- 決済システム接続待ち -->
@@ -261,12 +261,12 @@ function payLink(memberNo){
 }
 function priceText(){
   var d=jstNow(),ym=d.getUTCFullYear()*100+(d.getUTCMonth()+1);
-  if(ym<=202609) return "9月末までの入居 → 2026年9月末まで課金¥0（課金開始は10/1）";
+  if(ym<=202612) return "2026年内は体験入居 → 無料（カード登録なし）";
   return "月額 ¥9,800（税込・月単位・縛りなし）";
 }
 
 var isOpen=Date.now()>=OPEN_AT;
-if(isOpen){document.getElementById("open-state").textContent="完全開街——入居受付中";}
+if(isOpen){document.getElementById("open-state").textContent="体験入居 受付中";}
 
 if(!isOpen){
   show("pre-open");
