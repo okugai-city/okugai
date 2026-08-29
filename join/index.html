@@ -41,6 +41,9 @@ h1{font-family:var(--serif);font-size:30px;font-weight:800;letter-spacing:.04em;
 .note b{color:var(--gold2)}
 .ok{color:var(--lime);font-weight:900}
 .warn{border:1px solid rgba(232,185,92,.4);border-radius:14px;padding:14px 16px;font-size:12px;color:var(--sub);margin-top:16px}
+.terms{margin:16px 0;padding:14px 16px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);font-size:13.5px;line-height:1.85}
+.terms p{margin:0 0 10px}
+.terms p:last-child{margin-bottom:0;opacity:.85}
 .warn b{color:var(--gold2)}
 .me{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-top:14px;font-size:13px}
 .me .tag{font-size:10px;letter-spacing:.2em;color:var(--sub);font-weight:900}
@@ -103,33 +106,48 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   <div class="brand"><span class="kanji">億街</span><small>OKUGAI — 入居受付</small></div>
   <div class="badge">電脳億街 移住案内所<b id="open-state">2026.8.17 完全開街</b></div>
   <h1>秘密基地に、入居する。</h1>
-  <p class="lead">入居はカード登録制です。<b style="color:var(--gold2)">2026年9月末までの入居は移住費¥0</b>——カードを登録しても課金は発生しません（課金開始は10/1）。10月以降の入居は月額¥9,800（月単位・縛りなし）です。登録が確認でき次第、Discordの鍵（住人ロール）は自動で渡ります。</p>
+  <p class="lead"><b style="color:var(--gold2)">2026年12月31日まで、カード登録なしの「体験入居」を受け付けています。</b>住人限定の部屋も、システムも、すべて無料でお使いいただけます。2027年1月1日からは月額¥9,800の有料会員となり、カードのご登録がない場合はご利用いただけなくなります（12月に改めてご案内します）。</p>
 
   <!-- 8/4前 -->
   <div class="card hidden" id="pre-open">
     <h2>完全開街は 8月17日</h2>
-    <p>入居受付は <b style="color:var(--gold2)">8/17 0時</b> にこのページで開始します。<b style="color:var(--gold2)">9月末までの入居は移住費¥0</b>です。それまでは無料の見学席で街をご覧ください。</p>
+    <p>体験入居の受付中です。<b style="color:var(--gold2)">2026年12月31日まで、カード登録なしで無料</b>でお使いいただけます。</p>
     <a class="btn btn-ghost" href="https://discord.gg/B6h8F6nMH5" target="_blank" rel="noopener">Discordの見学席へ(無料)</a>
   </div>
 
   <!-- STEP1: ログイン -->
   <div class="card hidden" id="step-login">
-    <h2><span class="n">壱</span>Discordでログイン</h2>
+    <h2><span class="n">1</span>Discordでログイン</h2>
     <p>鍵の渡し先を間違えないよう、まずDiscordアカウントの確認をします。</p>
     <button class="btn btn-primary" id="btn-login">Discordでログインする</button>
   </div>
 
   <!-- STEP2: サーバー未参加 -->
   <div class="card hidden" id="step-guild">
-    <h2><span class="n">弐</span>まず街に入る</h2>
+    <h2><span class="n">2</span>まず街に入る</h2>
     <p>あなたのDiscordアカウントはまだ億街サーバーに参加していません。先に見学席から街に入ってください（無料・数秒で終わります）。</p>
     <a class="btn btn-primary" href="https://discord.gg/B6h8F6nMH5" target="_blank" rel="noopener">億街Discordに参加する</a>
     <button class="btn btn-ghost" onclick="location.reload()">参加したら、ここを押して再確認</button>
   </div>
 
   <!-- STEP3: カード登録 -->
+  <!-- 体験入居（2026年内・カード登録なし）。2027/1/1からは下の step-pay に自動で戻る -->
+  <div class="card hidden" id="step-trial">
+    <h2><span class="n">3</span>体験入居する</h2>
+    <div class="me"><span class="tag">鍵の渡し先</span><b id="trial-name">—</b></div>
+    <p style="margin-top:14px">下のボタンを押すと、その場で住人の鍵をお渡しします。<b>カードの登録は必要ありません。</b></p>
+    <div class="terms">
+      <p><b>2026年12月31日まで</b><br>住人限定の3部屋も、システムも、すべて無料でお使いいただけます。</p>
+      <p><b>2027年1月1日から</b><br>月額¥9,800の有料会員となります。カードのご登録がない場合、<b>システムの利用も、コミュニティも、すべてご利用いただけなくなります。</b></p>
+      <p>勝手に課金されることはありません。ご継続はご自身でカードを登録していただく形です。<b>12月に改めてご案内します</b>ので、中身を見たうえで、そのとき決めていただければ大丈夫です。</p>
+    </div>
+    <p class="price" id="trial-slots">体験入居 100名限定</p>
+    <a class="btn btn-gold" id="btn-trial" href="#">体験入居する</a>
+    <p class="note">億荘（¥49,800/月）は審査制で<b>募集開始は2027年1月予定</b>——<a href="https://okugai.net/lp/#register">入居希望の事前登録</a>をいただいた方に個別でご案内します。</p>
+  </div>
+
   <div class="card hidden" id="step-pay">
-    <h2><span class="n">参</span>カードを登録して入居</h2>
+    <h2><span class="n">3</span>カードを登録して入居</h2>
     <div class="me"><span class="tag">鍵の渡し先</span><b id="me-name">—</b></div>
     <p style="margin-top:14px" id="pay-desc">下のボタンから決済ページ（テレコムクレジット）でカードを登録すると、数分以内に住人ロールが自動で付与されます。</p>
     <p class="price" id="pay-price">9月末までの入居 → 9月末まで課金¥0</p>
@@ -145,6 +163,14 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   </div>
 
   <!-- すでに住人 -->
+  <!-- 体験入居の完了 -->
+  <div class="card hidden" id="step-trial-done">
+    <h2>鍵をお渡ししました</h2>
+    <p id="trial-done-msg">Discordに戻ると、住人だけの部屋が開いているはずです。</p>
+    <p class="note">まずは <b>#広場</b> でひとこと挨拶をどうぞ。大家が拾います。</p>
+    <a class="btn btn-gold" href="https://discord.gg/B6h8F6nMH5" target="_blank" rel="noopener">Discordを開く</a>
+  </div>
+
   <div class="card hidden" id="step-done">
     <h2><span class="ok">すでに住人です</span></h2>
     <p>あなたはもう鍵をお持ちです。マイページで住人証を確認できます。</p>
@@ -162,28 +188,25 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
           <li>広場で住人と話す、質問する（来街のあいさつもここ）</li>
           <li>回覧板の街のお知らせと、毎朝6時の相場3行まとめ</li>
           <li>実績館の走行記録——良い月も悪い月も、加工なしの記録として</li>
-          <li>移住届で、入居した住人の記帳を読む</li>
           <li>サイトの記事・入居ガイドをすべて読む</li>
         </ul>
-        <p class="cmp-x">見学のままでは、下の4部屋には入れません。移住届への記帳もできません（読むのは自由です）。</p>
+        <p class="cmp-x">見学のままでは、下の3部屋には入れません。</p>
       </div>
       <div class="cmp-col is-key">
         <div class="cmp-h"><small>RESIDENT</small>入居（住人・月額¥9,800）</div>
         <p class="cmp-lead">見学でできることは全部そのまま。そのうえで——</p>
         <ul>
-          <li><b>リアルタイムトレード</b>／大家とT.K.の取引を、狙いと結果ごと公開する部屋。使っているのは工房で配っているインジケーターなので、同じ画面を手元で再現できます</li>
+          <li><b>相場実況</b>／運営がいま見ている相場を、そのままお見せする部屋。トレードの実況と、注目している通貨・場面の見立て。使っているのは工房で配っているインジケーターなので、同じ画面を手元で再現できます</li>
           <li><b>経済ニュース</b>／毎朝6時、相場レポートの全文と「今日はここを見る」</li>
-          <li><b>相場考察now</b>／相場の考察が、その場で流れてくる部屋</li>
           <li><b>工房</b>／配信で使っているインジケーターの配布とサポート、口座開設と口座番号登録の窓口、マニュアル一式</li>
-          <li><b>移住届に記帳できます</b>／回覧板で「○人目の住人」として街に紹介されます</li>
         </ul>
-        <p class="cmp-x">この4部屋は、見学の方のチャンネル一覧には表示されません。入居すると現れます。</p>
+        <p class="cmp-x">この3部屋は、見学の方のチャンネル一覧には表示されません。入居すると現れます。</p>
       </div>
     </div>
     <p class="note">月単位・<b>縛りなし</b>。解約はマイページからいつでも申請でき、当月末までご利用いただけます。<br>億街は教育・コミュニティサービスです。売買の指示や推奨、成果の保証は行いません。</p>
   </div>
 
-  <div class="en"><b>English:</b> Enrollment is card-registration based (join by Sep 30: ¥0 until Oct 1, 2026 / from October: ¥9,800/mo). Sign in with Discord above, join the server if prompted, then follow your personal card-registration link. Your resident role is granted automatically after registration.<br><br>
+  <div class="en"><b>English:</b> Trial residency is open until December 31, 2026 — <b>no card required, completely free</b>. Sign in with Discord above, join the server if prompted, then tap the button to receive your resident role instantly. From January 1, 2027, membership becomes ¥9,800/month and requires card registration; without it, access to the resident rooms and systems will end. We will send a reminder in December.<br><br>
   <b>Free vs resident:</b> Visitors can use the plaza, the bulletin board with the daily three-line market brief, the records room, and can read the residents' register. Residents additionally get four rooms — our trades with the reasoning behind them, the full morning report, market notes, and the workshop, which hands out the very indicators used in those trades so you can reproduce the same screen — and can sign the residents' register. Monthly, no lock-in; you can request cancellation from your member page at any time.</div>
 
   <p class="foot">億街は教育・コミュニティサービスです。売買の指示や成果の保証は行いません。<br>
@@ -225,6 +248,11 @@ function monthCourse(){
   if(ym===202609) return TELECOM.courseSep?{kind:"auth",course:TELECOM.courseSep}:null;
   return TELECOM.courseOct?{kind:"pay",course:TELECOM.courseOct}:null;
 }
+// 体験入居の期間か（2026/12/31 23:59 JST まで）。ここを過ぎるとカード登録に自動で戻る。
+// join-free 側にも同じ期限があり、二重の安全弁になっている。
+function isTrialPeriod(){
+  return Date.now() < Date.parse("2026-12-31T15:00:00Z");
+}
 function payLink(memberNo){
   // 接続仕様書準拠: カード認証=adult/order.pl(moneyなし) / 都度決済=secure/order.pl(money必須)
   var c=monthCourse(),base="https://secure.telecomcredit.co.jp/inetcredit/";
@@ -262,6 +290,40 @@ if(!isOpen){
       if(!info.ok){show("step-login");return;}
       if(info.isJunin){show("step-done");return;}
       if(!info.inGuild){show("step-guild");return;}
+      // 2026年内は体験入居（カード登録なし）、2027/1/1からカード登録に戻る
+      if(isTrialPeriod()){
+        document.getElementById("trial-name").textContent=(info.name||"あなた")+"（Discord）";
+        show("step-trial");
+        // 残り枠の表示（残り30以下のときだけ実数を出す。free-slots側で判定）
+        try{
+          var sl=await (await fetch(SUPABASE_URL+"/functions/v1/free-slots")).json();
+          if(sl && sl.show && sl.left!=null){
+            document.getElementById("trial-slots").textContent="体験入居 残り"+sl.left+"名";
+          }
+        }catch(e){}
+        document.getElementById("btn-trial").onclick=async function(ev){
+          ev.preventDefault();
+          var btn=this; btn.textContent="手続き中…"; btn.style.pointerEvents="none";
+          try{
+            var res=await fetch(SUPABASE_URL+"/functions/v1/join-free",{
+              method:"POST",
+              headers:{Authorization:"Bearer "+sess.access_token,apikey:SUPABASE_ANON_KEY}
+            });
+            var out=await res.json();
+            if(out.status==="joined"||out.status==="already"){
+              show("step-trial-done");
+            }else if(out.status==="full"){
+              document.getElementById("trial-slots").textContent="満員になりました";
+              btn.textContent="定員に達しました"; 
+            }else if(out.status==="not_in_guild"){
+              show("step-guild");
+            }else{
+              btn.textContent="もう一度お試しください"; btn.style.pointerEvents="";
+            }
+          }catch(e){ btn.textContent="もう一度お試しください"; btn.style.pointerEvents=""; }
+        };
+        return;
+      }
       if(!TELECOM.clientip||!monthCourse()||!info.memberNo){show("step-wait");return;}
       document.getElementById("me-name").textContent=(info.name||"あなた")+"（Discord）";
       document.getElementById("pay-price").textContent=priceText();
