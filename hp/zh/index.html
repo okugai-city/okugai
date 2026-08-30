@@ -759,7 +759,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <p class="mission">那座高塔，你打算一辈子<em>只是仰望</em>吗？</p>
     <p class="mission-sub">白手起家的交易者，在这座城市炼成——<b>亿街 OKUGAI</b>。</p>
     <p class="lead">这是一座由交易专家建立的赛博之城，只为一个目的：以集体的纪律，锻造能独立取胜的个人。<br>任何地图上都找不到它——但城门永远敞开。</p>
-    <p class="hero-offer">亿街已开街——入住受理中（9月30日前入住：10月1日前¥0）</p>
+    <p class="hero-offer">亿街已开街——2026年内免费体验入住（无需登记信用卡）</p>
     <div class="hero-ctas">
       <a class="btn btn-primary" href="../../lp/zh/index.html">入住沙龙</a>
       <a class="btn btn-kairan" href="#kairan">订阅城市来信（免费）</a>
@@ -1008,7 +1008,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <div class="news">
       <div class="newsrow">
         <time datetime="2026-07">2026.07</time><span class="ntag soon">SOON</span>
-        <p>亿街沙龙开始受理入住。9月30日前入住，秘密基地免费至2026年9月30日（10月起¥9,800日元/月）。</p>
+        <p>亿街沙龙开始受理入住。2026年12月31日前可免费体验入住，无需登记信用卡（2027年1月1日起¥9,800日元/月）。</p>
       </div>
       <div class="newsrow">
         <time datetime="2026-07">2026.07</time><span class="ntag open">OPEN</span>
@@ -1050,7 +1050,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
       <a class="gstep" href="../../lp/zh/index.html">
         <div class="gnum">STEP III</div>
         <h3>预定你的住处</h3>
-        <p>如果这座城市的空气适合你，城门已开——随时入住（9月30日前入住：10月1日前¥0）。</p>
+        <p>如果这座城市的空气适合你，城门已开——随时入住（2026年内免费，无需信用卡）。</p>
         <span class="go">查看入住指南 →</span>
       </a>
     </div>
@@ -1072,7 +1072,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
           <li>住户验证报告摘要</li>
           <li>实时交易：开盘时段提醒</li>
           <li>瞭望塔新专栏上线通知</li>
-          <li>首批50个免费名额的实时动态</li>
+          <li>入住受理与城市最新消息</li>
         </ul>
         <p class="knote">随时可退订。不提供交易指示，也不保证任何成果。社区目前以日语为主，多语言拓展正在计划中。</p>
       </div>
@@ -1171,7 +1171,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 <a class="totop" href="#top" aria-label="返回顶部"><svg viewBox="0 0 24 24"><path d="m6.5 14.5 5.5-5.5 5.5 5.5"/></svg></a>
 
 <div class="sticky-cta">
-  <p class="scta-note">现已开街／9月30日前入住：10月1日前¥0</p>
+  <p class="scta-note">现已开街／2026年内免费体验入住</p>
   <div class="scta-row">
     <a class="btn btn-line-cta" href="#kairan">城市来信（免费）</a>
     <a class="btn btn-grad-cta" href="../../lp/zh/index.html">入住沙龙</a>
@@ -1353,10 +1353,10 @@ var ROOM_URL="../../room/";
 (function(){if(Date.now()<Date.parse("2026-08-16T15:00:00Z"))return;
 document.querySelectorAll('a').forEach(function(a){var t=a.textContent||'';
   if(/enrollment opens Aug 17|Pre-register to move in/i.test(t)){
-    a.textContent="入住秘密基地（9月30日前入住：10月1日前¥0）";
+    a.textContent="入住秘密基地（2026年内免费・无需信用卡）";
     a.setAttribute('href','https://okugai.net/join/');a.removeAttribute('target');
   }});
-var ho=document.querySelector('.hero-offer');if(ho)ho.textContent="亿街已开街——入住受理中（9月30日前入住：10月1日前¥0）";
+var ho=document.querySelector('.hero-offer');if(ho)ho.textContent="亿街已开街——2026年内免费体验入住（无需登记信用卡）";
 var b=document.getElementById('open-badge');if(b)b.textContent="已开街——入住受理中";
 var st=document.getElementById('open-status');if(st)st.textContent="入住受理中 → 立即登记";
 })();
