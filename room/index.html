@@ -1103,8 +1103,14 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
     sb.from('profiles').select('*').eq('id',user.id).maybeSingle().then(function(r){
       var p=r.data||{};
       _persona.chips={plan:PLAN[p.plan]||'見学',banchi:p.banchi||'番地 未定',since:'移住 '+String(p.created_at||user.created_at||'').slice(0,10)};
-      // 契約・お支払いの管理(解約申請) — カード登録済みプランのみ表示
       if(p.plan==='kichi'||p.plan==='okuso'){
+        /* 契約・お支払いの管理(解約申請) — **カードを登録している人にだけ**出す。
+           2026年内の体験入居はカード登録が無く、止めるべき課金がそもそも無い。
+           plan だけで判定すると体験入居者にも「次回課金日の前日までに処理され…」と出て、
+           存在しない契約の解約申請を送らせることになる（2026-08-30に修正）。
+           判定は profiles.card_registered_at（telecom_card_registered から埋め戻し済み）。
+           口座紐付け(initSysLink)と部屋の案内は体験入居者にも必要なので、この分岐の外に置く。 */
+        if(p.card_registered_at){
         var ds=document.getElementById('door-stripe');ds.hidden=false;ds.href='#';
         ds.onclick=function(ev){ev.preventDefault();
           if(!window.confirm('解約を申請しますか？\n次回課金日の前日までに処理され、以降の請求は発生しません。当月末までは引き続きご利用いただけます。'))return;
@@ -1115,6 +1121,7 @@ var PASS_SALT="okugai-room-v1", PASS_ITER=200000;
             }).catch(function(){window.alert('通信に失敗しました。時間をおいて再度お試しください。')});
           });
         };
+        }
         document.getElementById('doors-note').hidden=true;
         initSysLink(sb,user,p);
       }
