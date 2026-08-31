@@ -1,0 +1,37 @@
+[
+  {
+    "date": "2026.08.29",
+    "datetime": "2026-08-29",
+    "tag": "Changes",
+    "type": "info",
+    "html": "<b>The rooms have been reorganised.</b> \"Real-time Trade\" and \"Market View now\" are merged into <b>#相場実況 (Live Market)</b>, and \"#移住届\" is closed — introductions now happen in <b>#広場 (The Square)</b>. Moving in opens three rooms: Live Market, Workshop and Economic News."
+  },
+  {
+    "date": "2026.08.24",
+    "datetime": "2026-08-24",
+    "tag": "Notice",
+    "type": "info",
+    "html": "<b>Switched to a free trial residency through 2026.</b> No credit card registration is required. After the first week we decided it was only fair to let people see the inside before deciding. From January 1, 2027 it becomes ¥9,800/month (card registration required); we will explain again in December."
+  },
+  {
+    "date": "2026.08.17",
+    "datetime": "2026-08-17",
+    "tag": "Open",
+    "type": "info",
+    "html": "<b>OKUGAI is fully open.</b> Enrollment started at 00:00 today. The 6 a.m. daily market report has also begun."
+  },
+  {
+    "date": "2026.07.27",
+    "datetime": "2026-07-27",
+    "tag": "Records",
+    "type": "info",
+    "html": "Started logging systems 1–3 in the residents' record book (3 live accounts). Automatically compiled from trade data — win rate, profit and loss, and withdrawals, all shown as they are."
+  },
+  {
+    "date": "2026.07.20",
+    "datetime": "2026-07-20",
+    "tag": "Open",
+    "type": "info",
+    "html": "The hideout opened. Trial residency is now accepting applications — <b>free through 2026, no card required</b>."
+  }
+]
