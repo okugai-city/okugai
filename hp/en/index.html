@@ -1223,8 +1223,24 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   }
 
   // 告知板: data/news.json から自動生成(先頭が最新)。取得失敗時はHTML内の静的リストを表示
-  fetch('../../data/news-en.json?v=' + Date.now())
-    .then((r) => (r.ok ? r.json() : Promise.reject()))
+  // 入居のお知らせを告知板に混ぜる（2026-08-31 追加）
+  // ⚠**総人数は出さない**（社長判断）。「5人しかいない」と読まれるため、
+  //   1件ずつの出来事として見せる。氏名も出さない（日付のみ）。
+  //   free-slots が返すのは直近14日以内の入居だけ。無ければ何も足されない。
+  //   残り枠のカウントダウンは show=true（残り30以下）になってから別途出す。
+  Promise.all([
+    fetch('../../data/news-en.json?v=' + Date.now()).then((r) => (r.ok ? r.json() : Promise.reject())),
+    fetch('https://xtrtbgymwsexzadrjedg.supabase.co/functions/v1/free-slots')
+      .then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  ])
+    .then(([items, slots]) => {
+      const rows = ((slots && slots.recent) || []).map((iso) => {
+        const dt = new Date(iso); const p = (x) => ('0' + x).slice(-2);
+        const ymd = dt.getFullYear() + '-' + p(dt.getMonth() + 1) + '-' + p(dt.getDate());
+        return { datetime: ymd, date: ymd.replace(/-/g, '.'), tag: 'Resident', type: 'info', html: 'A new resident moved in.' };
+      });
+      return rows.concat(items).sort((a, b) => String(b.datetime).localeCompare(String(a.datetime)));
+    })
     .then((items) => {
       const wrap = document.querySelector('#news .news');
       if (!wrap || !Array.isArray(items) || !items.length) return;
